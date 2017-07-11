@@ -11,16 +11,36 @@
 		<title>Cadastro de Cursos</title>
 	</h:head>
 	<body>
-		<h:form>
-			<p:panel header="Cadastro de Cursos">
-				<p:panelGrid columns="2">
+		<h:form id="form-cursos">
+			<p:growl />
+			<p:panel header="Cadastro de Cursos" style="width:60%;">
+				<p:panelGrid columns="2" style="width:95%;">
 					<h:outputLabel value="Nome:"/>
-					<p:inputText value="#{cursoBean.curso.nome}"/>
+					<p:inputText value="#{cursoBean.curso.nome}" required="true"
+						requiredMessage="Você deve informar o nome do usuário" 
+						validatorMessage=" O nome do curso deve ter entre 3 e 10 caracteres">
+						<f:validateLength minimum="3" maximum="10"/>	
+					</p:inputText>
 					<h:outputLabel value="Descrição:"/>
 					<p:inputTextarea valeu="#{cursoBean.curso.descricao}"
-						cols="40" rows="3"/>
+						cols="40" rows="3" required="true" requiredMessage="Preencha a Descrição"/>
+					<h:outputLabel value="Duração:"/>
+					<p:spinner value="#{cursoBean.curso.duracao}" min="1"
+						stepFactor="0.5" size="1" max="10"/>
+					<h:outputLabel value="Tipo:"/>
+					<p:selectOneMenu value="#{cursoBean.curso.tipo}" required="true"
+						requiredMessage="Selecione o tipo">
+						<f:selectItem itemLabel=":: Selecione ::" itemValue="#{null}"/>
+						<f:selectItems value="#{cursoBean.tipos}" var="tipo"
+						itemLabel="#{tipo.label}" itemValue="#{tipo}"/>
+					</p:selectOneMenu>
+					<h:outputLabel value="Data de Criação"/>
+					<p:calendar value="#{cursoBean.curso.dataCriacao}"
+					pattern="dd/MM/yyyy" maxdate="#{cursoBean.dataAtual}"/>
 				</p:panelGrid>
 			</p:panel>
+			<br/>
+			<p:commandButton icon="ui-icon-disk" value="Salvar" action="#{cursoBean.salvar}" update="@form"/>
 		</h:form>
 	</body>
 	
