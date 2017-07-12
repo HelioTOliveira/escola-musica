@@ -19,19 +19,31 @@ import escola.musica.modelo.TipoCurso;
 @SessionScoped
 public class CursoBean {
 
-	private Curso curso = new Curso();
+	private Curso curso;
 	private List<TipoCurso> tipos = Arrays.asList(TipoCurso.values());
 	private List<Curso> cursos = new ArrayList<Curso>();
 
+	public CursoBean(){
+		cursos = new CursoDAO().listarTodos();
+		curso = new Curso();
+	}
+	
 	public String salvar(){
 		
 		new CursoDAO().salvar(curso);
-		cursos.add(curso);
+		cursos = new CursoDAO().listarTodos();
 		curso = new Curso();
 		
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage("Curso Salvo com Sucesso"));
 		return "curso_lista?faces-redirect=true";
+	}
+	
+	public String editar(Curso curso){
+		
+		this.curso = curso;
+		
+		return "curso_formulario?faces-redirect=true";
 	}
 	
 	public String getDataAtual(){

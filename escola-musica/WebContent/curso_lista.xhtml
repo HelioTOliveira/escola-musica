@@ -12,22 +12,29 @@
 	</h:head>
 	<h:body>
 		<p:panel header="Cursos Cadastrados" style="width:80%;">
-			<p:dataTable value="#{cursoBean.cursos}" var="curso">
-				<p:column headerText="Nome">
-					<h:outputText value="#{curso.nome}" style="width:300px;"/>
-				</p:column>
-				<p:column headerText="Duração">
-					<h:outputText value="#{curso.duracao}" style="width:80px;"/>
-				</p:column>
-					<p:column headerText="Tipo">
-					<h:outputText value="#{curso.tipo.label}"/>
-				</p:column>
-				<p:column headerText="Data Criação">
-					<h:outputText value="#{curso.dataCriacao}">
-						<f:convertDateTime pattern="dd/MM/yyyy"/>
-					</h:outputText>						
-				</p:column>
-			</p:dataTable>
+			<p:button value="Novo Curso" outcome="curso_formulario"/>
+			<br/><br/>
+			<h:form>
+				<p:dataTable value="#{cursoBean.cursos}" var="curso">
+					<p:column headerText="Nome">
+						<h:outputText value="#{curso.nome}" style="width:300px;"/>
+					</p:column>
+					<p:column headerText="Duração">
+						<h:outputText value="#{curso.duracao}" style="width:80px;"/>
+					</p:column>
+						<p:column headerText="Tipo">
+						<h:outputText value="#{curso.tipo.label}"/>
+					</p:column>
+					<p:column headerText="Data Criação">
+						<h:outputText value="#{curso.dataCriacao}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>						
+					</p:column>
+					<p:column>
+						<p:commandLink value="Editar" action="#{cursoBean.editar(curso)}"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
 		</p:panel>		
 	</h:body>
 	
