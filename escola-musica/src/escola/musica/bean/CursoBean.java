@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import escola.musica.dao.CursoDAO;
 import escola.musica.modelo.Curso;
 import escola.musica.modelo.TipoCurso;
 
@@ -23,6 +24,8 @@ public class CursoBean {
 	private List<Curso> cursos = new ArrayList<Curso>();
 
 	public String salvar(){
+		
+		new CursoDAO().salvar(curso);
 		cursos.add(curso);
 		curso = new Curso();
 		

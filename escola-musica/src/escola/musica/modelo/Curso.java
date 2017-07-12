@@ -2,9 +2,16 @@ package escola.musica.modelo;
 
 import java.util.Date;
 
-public class Curso {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
 
-	private Integer id;
+@Entity
+public class Curso {
+	
+	@Id
+	@GeneratedValue
+	private Integer id;	
 	private String nome;
 	private String descricao;
 	private double duracao = 1;
