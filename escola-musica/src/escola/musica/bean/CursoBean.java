@@ -46,6 +46,19 @@ public class CursoBean {
 		return "curso_formulario?faces-redirect=true";
 	}
 	
+	public void prepararExclusao(Curso curso){
+		
+		this.curso = curso;
+	}
+	
+	public void excluir(){
+		
+		new CursoDAO().excluir(curso);
+		FacesContext.getCurrentInstance()
+			.addMessage(null, new FacesMessage("Curso excluído com Sucesso"));
+		cursos = new CursoDAO().listarTodos();
+	}
+	
 	public String getDataAtual(){
 		
 		return new SimpleDateFormat("dd/MM/yyyy").format(new Date());

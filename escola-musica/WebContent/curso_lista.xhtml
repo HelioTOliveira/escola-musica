@@ -15,6 +15,7 @@
 			<p:button value="Novo Curso" outcome="curso_formulario"/>
 			<br/><br/>
 			<h:form>
+			<p:growl/>
 				<p:dataTable value="#{cursoBean.cursos}" var="curso">
 					<p:column headerText="Nome">
 						<h:outputText value="#{curso.nome}" style="width:300px;"/>
@@ -30,10 +31,21 @@
 							<f:convertDateTime pattern="dd/MM/yyyy"/>
 						</h:outputText>						
 					</p:column>
-					<p:column>
-						<p:commandLink value="Editar" action="#{cursoBean.editar(curso)}"/>
+					<p:column style="text-align:center;">
+						<p:commandLink value="Editar" action="#{cursoBean.editar(curso)}"
+						style ="color:blue"/>
+							<p:commandLink value="Excluir" 
+								actionListener="#{cursoBean.prepararExclusao(curso)}"
+								oncomplete="PF('confirmarExclusaoDialog').show();"
+								style ="color:red; margin-left:20px" update="@form"/>
 					</p:column>
 				</p:dataTable>
+				<p:confirmDialog message="Deseja realmente excluir o curso #{cursoBean.curso.nome}" 
+					widgetVar="confirmarExclusaoDialog">
+					<p:commandButton value="Sim" action="#{cursoBean.excluir()}"
+						oncomplete="PF('confirmarExclusaoDialog').hide();" update="@form"/>
+					<p:commandButton value="Não" oncomplete="PF('confirmarExclusaoDialog').hide();"/>
+				</p:confirmDialog>
 			</h:form>
 		</p:panel>		
 	</h:body>

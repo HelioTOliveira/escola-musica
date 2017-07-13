@@ -30,4 +30,23 @@ public class CursoDAO {
 		return entityManager.createQuery("from Curso").getResultList();		
 		
 	}
+
+	public void excluir(Curso curso) {
+		
+		// Obeter o EntityManager
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		//Iniciar uma transação
+		entityManager.getTransaction().begin();
+		
+		//Vincular o curso com o banco
+		curso = entityManager.merge(curso);
+		
+		//Salvar ou alterar no banco
+		entityManager.remove(curso);
+		//Confirmar
+		entityManager.getTransaction().commit();
+		//Fechar o banco
+		entityManager.close();
+		
+	}
 }
