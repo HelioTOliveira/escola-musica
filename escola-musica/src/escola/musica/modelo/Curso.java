@@ -4,13 +4,19 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 public class Curso {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;	
 	private String nome;
 	private String descricao;
@@ -18,6 +24,7 @@ public class Curso {
 	private TipoCurso tipo;
 	private Date dataCriacao;
 
+	@NotNull(message="A data de criação deve ser informada")
 	public Date getDataCriacao() {
 		return dataCriacao;
 	}
@@ -33,7 +40,9 @@ public class Curso {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
+	@NotEmpty(message="O campo nome deve ser informado")
+	@Length(min=4, max=50, message="O campo nome deve ter entre 4 e 50 caracteres")
 	public String getNome() {
 		return nome;
 	}
@@ -41,7 +50,8 @@ public class Curso {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
+	@NotEmpty(message="Você deve informa a descrição")	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -49,7 +59,7 @@ public class Curso {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	
 	public double getDuracao() {
 		return duracao;
 	}
@@ -58,6 +68,7 @@ public class Curso {
 		this.duracao = duracao;
 	}
 
+	@NotNull(message=" Você dave selecionar o tipo do curso!")
 	public TipoCurso getTipo() {
 		return tipo;
 	}
