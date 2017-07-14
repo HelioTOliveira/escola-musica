@@ -16,21 +16,29 @@
 			<br/><br/>
 			<h:form>
 			<p:growl/>
-				<p:dataTable value="#{cursoBean.cursos}" var="curso">
-					<p:column headerText="Nome">
-						<h:outputText value="#{curso.nome}" style="width:300px;"/>
+				<p:dataTable value="#{cursoBean.cursos}" var="curso" paginator="true" rows="5"
+					rowsPerPageTemplate="5,10,15" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+						{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+						
+					<p:column headerText="Nome" style="width:300px;" sortBy="#{curso.nome}" filterBy="#{curso.nome}" 
+							filterMatchMode="contains">
+						<h:outputText value="#{curso.nome}"/>
 					</p:column>
-					<p:column headerText="Duração">
-						<h:outputText value="#{curso.duracao}" style="width:80px;"/>
+					
+					<p:column headerText="Duração" style="width:80px;" sortBy="#{curso.duracao}">
+						<h:outputText value="#{curso.duracao}" />
 					</p:column>
-						<p:column headerText="Tipo">
+					
+						<p:column headerText="Tipo" filterBy="#{curso.tipo.label}" filterMatchMode="contains">
 						<h:outputText value="#{curso.tipo.label}"/>
 					</p:column>
-					<p:column headerText="Data Criação">
+					
+					<p:column headerText="Data Criação" sortBy="#{curso.dataCriacao}">
 						<h:outputText value="#{curso.dataCriacao}">
 							<f:convertDateTime pattern="dd/MM/yyyy"/>
 						</h:outputText>						
 					</p:column>
+					
 					<p:column style="text-align:center;">
 						<p:commandLink value="Editar" action="#{cursoBean.editar(curso)}"
 						style ="color:blue"/>
@@ -39,6 +47,7 @@
 								oncomplete="PF('confirmarExclusaoDialog').show();"
 								style ="color:red; margin-left:20px" update="@form"/>
 					</p:column>
+					
 				</p:dataTable>
 				<p:confirmDialog message="Deseja realmente excluir o curso #{cursoBean.curso.nome}" 
 					widgetVar="confirmarExclusaoDialog">
