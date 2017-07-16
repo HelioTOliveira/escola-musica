@@ -8,5 +8,11 @@
 	   	<pattern value="/curso/accordion/" />
 	   	<view-id value="/curso_accordion.jsf"/>
 	   	<action onPostback="false">#{cursoBean.iniciarBean}</action>
-   </url-mapping> 
+    </url-mapping> 
+   
+   	<url-mapping id="cursomanutencao">
+	   	<pattern value="/curso/manutencao/" />
+	   	<view-id value="/pages/cursos/curso_wrapper.jsf"/>
+	   	<action onPostback="false">#{cursoBean.iniciarBean}</action>
+    </url-mapping> 
 </pretty-config>

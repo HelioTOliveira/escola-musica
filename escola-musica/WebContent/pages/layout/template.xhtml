@@ -7,13 +7,16 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:head>
-		<title> Escola Musica - <ui:insert name="titulo"/> </title>
+		<title> Escola Música - <ui:insert name="titulo"/> </title>
 	</h:head>
 	<h:body>
-		<h3>Conteúdo fixo</h3>
-		<ui:insert name="principal">
+		<h:form>
+			<p:menubar>
+				<p:menuitem value="Curso" url="/curso/manutencao/"/>
+			</p:menubar>
+		</h:form>
+		<ui:insert name="principal"/>
         <!--se não for chamado ele mostrar o conteudo abaixo como defualt -->
-			Conteúdo fixo - ui:insert
-		</ui:insert>
+		<!-- Conteúdo fixo - ui:insert -->		
 	</h:body>
 </html>

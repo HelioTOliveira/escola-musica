@@ -33,9 +33,12 @@ public class CursoBean {
 	public void iniciarBean(){
 		
 		cursos = new CursoDAO().listarTodos();
-		cursosAccordion = CursoDAO.listarCursosAccordion();
-		curso = new Curso();
+		cursosAccordion = CursoDAO.listarCursosAccordion();		
+	}
+	
+	public void novoCurso(){
 		
+		curso = new Curso();
 	}
 	
 	public List<Curso> getCursosAccordion() {
@@ -46,23 +49,21 @@ public class CursoBean {
 		this.cursosAccordion = cursosAccordion;
 	}
 
-	public String salvar(){
+	public void salvar(){
 		
 		new CursoDAO().salvar(curso);
 		cursos = new CursoDAO().listarTodos();
-		curso = new Curso();
+		curso = null;
 		
 		FacesContext.getCurrentInstance().addMessage(null, 
-				new FacesMessage("Curso Salvo com Sucesso"));
-		return "curso_lista?faces-redirect=true";
+				new FacesMessage("Curso Salvo com Sucesso"));		
 	}
 	
-	public String editar(Curso curso){
+	public void editar(Curso curso){
 		
 		this.curso = curso;
 		
-		return "curso_formulario?faces-redirect=true";
-	}
+ 	}
 	
 	public void prepararExclusao(Curso curso){
 		
