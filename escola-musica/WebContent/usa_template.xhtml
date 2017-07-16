@@ -1,0 +1,17 @@
+<ui:composition 
+    
+    template="/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<ui:define name="titulo">Teste Template</ui:define>
+	
+	<ui:define name="principal">
+    	<!--<h1>Conteúdo dinâmico página usa_template.xhtml</h1> -->
+    	<!-- Chamar uma pagina -->
+    	<h1>Conteúdo página usa_template</h1>
+    	<ui:include src="/inclusao_template.xhtml"/>
+	</ui:define>
+</ui:composition>
