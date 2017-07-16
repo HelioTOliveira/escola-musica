@@ -18,4 +18,16 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.jsf</url-pattern>
   </servlet-mapping>
+  
+  <filter>
+  	<filter-name>Pretty Filter</filter-name>  	
+  	<filter-class>com.ocpsoft.pretty.PrettyFilter</filter-class>  	
+  </filter>
+  
+  <filter-mapping>
+	  <filter-name>Pretty Filter</filter-name>
+	  <url-pattern>/*</url-pattern>
+	  <dispatcher>REQUEST</dispatcher>
+	  <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
 </web-app>

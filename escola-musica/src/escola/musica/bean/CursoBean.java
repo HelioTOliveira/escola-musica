@@ -24,10 +24,18 @@ public class CursoBean {
 	private List<Curso> cursos = new ArrayList<Curso>();
 	private List<Curso> cursosAccordion = new ArrayList<Curso>();
 
-	public CursoBean(){
+//	public CursoBean(){
+//		cursos = new CursoDAO().listarTodos();
+//		cursosAccordion = CursoDAO.listarCursosAccordion();
+//		curso = new Curso();
+//	}
+	
+	public void iniciarBean(){
+		
 		cursos = new CursoDAO().listarTodos();
 		cursosAccordion = CursoDAO.listarCursosAccordion();
 		curso = new Curso();
+		
 	}
 	
 	public List<Curso> getCursosAccordion() {
