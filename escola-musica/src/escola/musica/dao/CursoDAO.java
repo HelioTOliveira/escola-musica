@@ -8,45 +8,55 @@ import escola.musica.modelo.Curso;
 
 public class CursoDAO {
 
-	public void salvar(Curso curso){
-		
+	public void salvar(Curso curso) {
+
 		// Obeter o EntityManager
 		EntityManager entityManager = JPAUtil.getEntityManager();
-		//Iniciar uma transação
+		// Iniciar uma transação
 		entityManager.getTransaction().begin();
-		//Salvar ou alterar no banco
+		// Salvar ou alterar no banco
 		entityManager.merge(curso);
-		//Confirmar
+		// Confirmar
 		entityManager.getTransaction().commit();
-		//Fechar o banco
+		// Fechar o banco
 		entityManager.close();
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Curso> listarTodos(){
+	public List<Curso> listarTodos() {
 		// Obeter o EntityManager
 		EntityManager entityManager = JPAUtil.getEntityManager();
-		
-		return entityManager.createQuery("from Curso").getResultList();		
-		
+
+		return entityManager.createQuery("from Curso").getResultList();
+
 	}
 
 	public void excluir(Curso curso) {
-		
+
 		// Obeter o EntityManager
 		EntityManager entityManager = JPAUtil.getEntityManager();
-		//Iniciar uma transação
+		// Iniciar uma transação
 		entityManager.getTransaction().begin();
-		
-		//Vincular o curso com o banco
+
+		// Vincular o curso com o banco
 		curso = entityManager.merge(curso);
-		
-		//Salvar ou alterar no banco
+
+		// Salvar ou alterar no banco
 		entityManager.remove(curso);
-		//Confirmar
+		// Confirmar
 		entityManager.getTransaction().commit();
-		//Fechar o banco
+		// Fechar o banco
 		entityManager.close();
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<Curso> listarCursosAccordion() {
+		// TODO Auto-generated method stub
+		EntityManager entityManager = JPAUtil.getEntityManager();
+
+		return entityManager.createQuery("from Curso where nome in ('Violino',"
+				+ "'Bateria', 'Clarinete','Flauta', 'Guitarra', 'Violão', 'Oboé' ) order by nome").getResultList();
 		
 	}
 }

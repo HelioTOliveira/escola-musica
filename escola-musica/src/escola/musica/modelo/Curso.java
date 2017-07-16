@@ -76,5 +76,11 @@ public class Curso {
 	public void setTipo(TipoCurso tipo) {
 		this.tipo = tipo;
 	}
+	
+	public String obterImagem(){
+		
+		return nome.toLowerCase().replaceAll("ã", "a").replaceAll("é", "e")
+				.replaceAll(" ","_").concat(".png");
+	}
 
 }

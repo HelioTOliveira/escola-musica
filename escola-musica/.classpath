@@ -23,6 +23,8 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/validation-api-1.0.0.GA.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/itext-2.0.7.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/poi-3.10-FINAL.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/taglibs-standard-spec-1.2.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_121">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>

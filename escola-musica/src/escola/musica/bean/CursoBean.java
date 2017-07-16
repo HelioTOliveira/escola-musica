@@ -22,12 +22,22 @@ public class CursoBean {
 	private Curso curso;
 	private List<TipoCurso> tipos = Arrays.asList(TipoCurso.values());
 	private List<Curso> cursos = new ArrayList<Curso>();
+	private List<Curso> cursosAccordion = new ArrayList<Curso>();
 
 	public CursoBean(){
 		cursos = new CursoDAO().listarTodos();
+		cursosAccordion = CursoDAO.listarCursosAccordion();
 		curso = new Curso();
 	}
 	
+	public List<Curso> getCursosAccordion() {
+		return cursosAccordion;
+	}
+
+	public void setCursosAccordion(List<Curso> cursosAccordion) {
+		this.cursosAccordion = cursosAccordion;
+	}
+
 	public String salvar(){
 		
 		new CursoDAO().salvar(curso);

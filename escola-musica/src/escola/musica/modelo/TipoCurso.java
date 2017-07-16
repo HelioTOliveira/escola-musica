@@ -3,7 +3,7 @@ package escola.musica.modelo;
 public enum TipoCurso {
 
 	CORDAS("Cordas"),
-	MADERAS("Madeiras"),
+	MADEIRAS("Madeiras"),
 	METAIS("Metais"),
 	PERCUSSAO("Percussâo");
 	
