@@ -58,8 +58,9 @@ public class CursoBean {
 		this.cursosAccordion = cursosAccordion;
 	}
 
-	public void salvar(){
+	public void salvar()throws InterruptedException{ 
 		
+		Thread.sleep(2000);
 		new CursoDAO().salvar(curso);
 		cursos = new CursoDAO().listarTodos();
 		curso = null;

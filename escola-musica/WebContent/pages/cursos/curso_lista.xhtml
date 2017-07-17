@@ -39,12 +39,15 @@
 				</p:column>
 				
 				<p:column style="text-align:center;" exportable="false">
-					<p:commandLink value="Editar" action="#{cursoBean.editar(curso)}"
-					style ="color:blue" update=":curso_form"/>
-						<p:commandLink value="Excluir" 
+					
+					<p:commandButton icon="editar-icon" action="#{cursoBean.editar(curso)}"
+						style ="color:blue" update=":curso_form"/>
+						
+					<p:commandButton icon="excluir-icon" 
 							actionListener="#{cursoBean.prepararExclusao(curso)}"
 							oncomplete="PF('confirmarExclusaoDialog').show();"
 							style ="color:red; margin-left:20px" update="@form"/>
+							
 				</p:column>
 				
 			</p:dataTable>

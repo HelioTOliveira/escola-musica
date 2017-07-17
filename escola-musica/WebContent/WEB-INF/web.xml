@@ -30,4 +30,9 @@
 	  <dispatcher>REQUEST</dispatcher>
 	  <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
+  
+  <context-param>
+  	<param-name>primefaces.THEME</param-name>
+  	<param-value>afternoon</param-value>
+  </context-param>
 </web-app>
