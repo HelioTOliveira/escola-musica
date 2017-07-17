@@ -31,8 +31,8 @@
 			pattern="dd/MM/yyyy" maxdate="#{cursoBean.dataAtual}"/>
 		</p:panelGrid>
 		<br/>
-		<p:commandButton icon="ui-icon-disk" value="Salvar" action="#{cursoBean.salvar}" update="@form"/>
-		<p:commandButton value="Voltar" action="#{cursoBean.voltar}" update="@form" 
+		<p:commandButton icon="salvar-icon" value="Salvar" action="#{cursoBean.salvar}" update="@form"/>
+		<p:commandButton icon="voltar-icon" value="Voltar" action="#{cursoBean.voltar}" update="@form" 
 			immediate="true"/>
 	</p:panel>
 	

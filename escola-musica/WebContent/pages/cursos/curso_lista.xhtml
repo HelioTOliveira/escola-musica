@@ -11,7 +11,7 @@
 	
 	<p:panel header="Cursos Cadastrados" style="width:80%;" 
 		rendered="#{cursoBean.curso == null}">
-		<p:commandButton value="Novo Curso" action="#{cursoBean.novoCurso}"
+		<p:commandButton icon="adicionar-icon" value="Novo Curso" action="#{cursoBean.novoCurso}"
 		update="@form"/>
 		<br/><br/>
 		
@@ -61,7 +61,7 @@
 					encoding="iso-8859-1"/>
 			</h:commandLink>
 			
-			<p:confirmDialog message="Deseja realmente excluir o curso #{cursoBean.curso.nome}" 
+			<p:confirmDialog message="Deseja realmente excluir o curso #{cursoBean.cursoExclusao.nome}" 
 				widgetVar="confirmarExclusaoDialog">
 				<p:commandButton value="Sim" action="#{cursoBean.excluir()}"
 					oncomplete="PF('confirmarExclusaoDialog').hide();" update="@form"/>
