@@ -78,6 +78,10 @@ public class CursoBean {
 		cursos = new CursoDAO().listarTodos();
 	}
 	
+	public void voltar(){
+		curso = null;
+	}
+	
 	public String getDataAtual(){
 		
 		return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
