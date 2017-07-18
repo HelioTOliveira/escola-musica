@@ -12,6 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import escola.musica.dao.CursoDAO;
+import escola.musica.dao.GenericDAO;
 import escola.musica.modelo.Curso;
 import escola.musica.modelo.TipoCurso;
 
@@ -61,8 +62,10 @@ public class CursoBean {
 	public void salvar()throws InterruptedException{ 
 		
 		Thread.sleep(2000);
-		new CursoDAO().salvar(curso);
-		cursos = new CursoDAO().listarTodos();
+		new GenericDAO<Curso>(Curso.class).salvar(curso);
+		//new CursoDAO().salvar(curso);
+		cursos = new GenericDAO<Curso>(Curso.class).listarTodos();
+		//cursos = new CursoDAO().listarTodos();
 		curso = null;
 		
 		FacesContext.getCurrentInstance().addMessage(null, 

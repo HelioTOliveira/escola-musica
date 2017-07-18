@@ -44,7 +44,7 @@ public class GenericDAO<T> {
 		EntityManager em = JPAUtil.getEntityManager();
 		
 		List<T> resultados = 
-				em.createQuery("from" + classe + "c", classe).getResultList();
+				em.createQuery("select c from " + classe.getName() + " c", classe).getResultList();
 		
 		em.close();
 		
@@ -55,7 +55,7 @@ public class GenericDAO<T> {
 		
 		EntityManager em = JPAUtil.getEntityManager();
 		
-		T t = em.createQuery("from " + classe + " where id= :cod", classe).setParameter("cod", id)
+		T t = em.createQuery("from " + classe.getName() + " where id= :cod", classe).setParameter("cod", id)
 				.getSingleResult();
 		
 		em.close();
