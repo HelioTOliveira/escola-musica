@@ -24,7 +24,7 @@ public class AlunoBean implements Serializable {
 	private List<Aluno> alunos;
 	
 	public void iniciarBean(){
-		alunos = new GenericDAO<Aluno>(Aluno.class).listarTodos();
+	alunos = new GenericDAO<Aluno>(Aluno.class).listarTodos();
 		
 	}
 	
@@ -33,18 +33,24 @@ public class AlunoBean implements Serializable {
 	}
 	
 	public void salvar(){
-		new GenericDAO<Aluno>(Aluno.class);
+		new GenericDAO<Aluno>(Aluno.class).salvar(aluno);
 		
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage("Aluno cadastrado com sucesso"));
 		
 		alunos = new GenericDAO<Aluno>(Aluno.class).listarTodos();
+		aluno = null;
 	}
 	
 	public void editar(Aluno aluno){
 	
 		this.aluno = aluno;
 		
+	}
+	
+	public void voltar(){
+		
+		this.aluno = null;
 	}
 	
 	public Aluno getAluno() {
