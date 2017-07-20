@@ -28,6 +28,9 @@ public class Aluno implements Serializable{
 	private Date dataNascimento;
 	private String cpf;
 	private String email;
+	private boolean ativo;
+	private String telefone;
+	private Endereco endereco;
 
 	public Integer getId() {
 		return id;
@@ -89,6 +92,12 @@ public class Aluno implements Serializable{
 		this.telefone = telefone;
 	}
 
-	private boolean ativo;
-	private String telefone;
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 }
