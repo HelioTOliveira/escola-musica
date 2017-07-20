@@ -21,7 +21,7 @@
 				<h:outputText value="Email: "/>
 				<p:inputText value="#{alunoBean.aluno.email}" size="25"/>
 				<h:outputText value="Telefone: "/>
-				<p:inputMask value="#{alunoBean.aluno.telefone}" mask="(99) 9?99999999" size="12"/>
+				<p:inputMask value="#{alunoBean.aluno.telefone}" mask="(99) 9?99999999" size="12" placeHolder=""/>
 				<h:outputText value="Ativo"/>
 				<p:selectBooleanCheckbox value="#{alunoBean.aluno.ativo}"/>
 			</p:panelGrid>
@@ -39,13 +39,22 @@
 					<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
 					<f:selectItems value="#{alunoBean.estados}" var="estado" itemLabel="#{estado.label}"
 						itemValue="#{estado}"/>
+					<!-- Para diparar um evento quando selecionar o estado aparece o compo de cidades -->
+					<p:ajax envent="change" update="combo-cidades-group label-cidades-group"/>
 				</p:selectOneMenu>
-				<h:outputText value="Cidade"/>
-				<p:selectOneMenu value="#{alunoBean.aluno.endereco.cidade}">
-					<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
-					<f:selectItems value="#{alunoBean.cidadesDoEstado}" var="cidade"
-						itemLabel="#{cidade.nome}" itemValue="#{cidade.id}"/>
-				</p:selectOneMenu>
+				
+				<h:panelGroup id="label-cidades-group">
+					<h:outputText value="Cidade: " rendered="#{alunoBean.aluno.endereco.cidade.estado != null}"/>
+				</h:panelGroup>
+				
+				<h:panelGroup id="combo-cidades-group">					
+					<p:selectOneMenu id="combo-cidades" value="#{alunoBean.idCidade}"
+					 		rendered="#{alunoBean.aluno.endereco.cidade.estado != null}">
+						<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
+						<f:selectItems value="#{alunoBean.cidadesDoEstado}" var="cidade"
+							itemLabel="#{cidade.nome}" itemValue="#{cidade.id}"/>
+					</p:selectOneMenu>
+				</h:panelGroup>
 			</p:panelGrid>
 		</p:panel>
 		<br/>
