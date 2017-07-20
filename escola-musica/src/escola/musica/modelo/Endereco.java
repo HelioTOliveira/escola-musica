@@ -1,17 +1,19 @@
 package escola.musica.modelo;
 
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
-//anotação @Embeddable para vicular novas colunas em um tabela existente 
+//anotação @Embeddable para vicular a outra classe 
 @Embeddable
 public class Endereco {
 
 	private String logradouro;
 	private Integer numero;
 	private String cep;
-	private Cidade cidade;
+	private Cidade cidade = new Cidade();
 
 	@NotEmpty(message= "Informe o logradouro")
 	public String getLogradouro() {
@@ -22,7 +24,7 @@ public class Endereco {
 		this.logradouro = logradouro;
 	}
 	
-	@NotNull(message= "Informe o númeor!")
+	@NotNull(message= "Informe o número!")
 	public Integer getNumero() {
 		return numero;
 	}
@@ -39,8 +41,10 @@ public class Endereco {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-
-	
+	//ManyToone para relacionar a tabela no banco n para 1
+	@ManyToOne
+	//Colocar o nome na coluna da tabela enderço para pode indentificar no banco
+	@JoinColumn(name = "id_cidade")
 	public Cidade getCidade() {
 		return cidade;
 	}

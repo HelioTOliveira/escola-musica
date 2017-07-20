@@ -14,15 +14,24 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 public class Cidade implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6742128311507392756L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String nome;
 	private Estado estado;
+
+	//Contrutor sem parametro para o hibernete utilizar, sem ele da erro
+	public Cidade(){}
+	
+	
+	public Cidade(String nome, Estado estado) {
+		super();
+		this.nome = nome;
+		this.estado = estado;
+	}
+
 
 	public Integer getId() {
 		return id;
