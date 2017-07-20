@@ -27,7 +27,26 @@
 			</p:panelGrid>
 		</p:panel>
 		<p:panel header="Dados do endereço">
-			
+			<p:panelGrid columns="2">
+				<h:outputText value="Lograsouro: "/>
+				<p:inputText value="#{alunoBean.aluno.endereco.logradouro}" size="25"/>
+				<h:outputText value="Número: "/>
+				<p:inputText value="#{alunoBean.aluno.endereco.numero}" size="5"/>
+				<h:outputText value="CEP: "/>
+				<p:inputMask mask="99999-999" value="#{alunoBean.aluno.endereco.cep}" size="10"/>
+				<h:outputText value="Estado: "/>
+				<p:selectOneMenu value="#{alunoBean.aluno.endereco.cidade.estado}">
+					<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
+					<f:selectItems value="#{alunoBean.estados}" var="estado" itemLabel="#{estado.label}"
+						itemValue="#{estado}"/>
+				</p:selectOneMenu>
+				<h:outputText value="Cidade"/>
+				<p:selectOneMenu value="#{alunoBean.aluno.endereco.cidade}">
+					<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
+					<f:selectItems value="#{alunoBean.cidadesDoEstado}" var="cidade"
+						itemLabel="#{cidade.nome}" itemValue="#{cidade.id}"/>
+				</p:selectOneMenu>
+			</p:panelGrid>
 		</p:panel>
 		<br/>
 		<p:commandButton value="Salvar" icon="salvar-icon" action="#{alunoBean.salvar}"
