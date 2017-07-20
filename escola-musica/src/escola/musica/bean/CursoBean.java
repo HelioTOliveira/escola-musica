@@ -1,14 +1,15 @@
 package escola.musica.bean;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import escola.musica.dao.CursoDAO;
@@ -17,14 +18,19 @@ import escola.musica.modelo.Curso;
 import escola.musica.modelo.TipoCurso;
 
 @ManagedBean
-@SessionScoped
-public class CursoBean {
+@ViewScoped
+public class CursoBean implements Serializable{
 
+	private static final long serialVersionUID = -862660658464075437L;
+	
+	
 	private Curso curso;
 	private List<TipoCurso> tipos = Arrays.asList(TipoCurso.values());
 	private List<Curso> cursos = new ArrayList<Curso>();
 	private List<Curso> cursosAccordion = new ArrayList<Curso>();
 	private Curso cursoExclusao;
+	private List<Curso> cursosFiltrados;
+	
 
 //	public CursoBean(){
 //		cursos = new CursoDAO().listarTodos();
@@ -89,6 +95,7 @@ public class CursoBean {
 		FacesContext.getCurrentInstance()
 			.addMessage(null, new FacesMessage("Curso excluído com Sucesso"));
 		cursos = new CursoDAO().listarTodos();
+		cursosFiltrados = null;
 	}
 	
 	public void voltar(){
@@ -122,6 +129,14 @@ public class CursoBean {
 
 	public void setCurso(Curso curso) {
 		this.curso = curso;
+	}
+
+	public List<Curso> getCursosFiltrados() {
+		return cursosFiltrados;
+	}
+
+	public void setCursosFiltrados(List<Curso> cursosFiltrados) {
+		this.cursosFiltrados = cursosFiltrados;
 	}
 	
 }

@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -45,6 +47,8 @@ public class Aluno implements Serializable{
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento")
+	@NotNull(message="informa a data de nascimento")
+	@Past(message="Informe uma data menor ou igual a data atual")
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}

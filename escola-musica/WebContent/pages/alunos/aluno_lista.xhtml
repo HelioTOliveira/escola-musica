@@ -23,11 +23,17 @@
  					<h:outputText value="#{aluno.email}"/> 
  				</p:column> 
  				<p:column headerText="Data Nascimento"> 
- 					<h:outputText value="#{aluno.dataNascimento}"/> 
+ 					<h:outputText value="#{aluno.dataNascimento}">
+ 						<f:convertDateTime pattern="dd/MM/yyyy"/>
+ 					</h:outputText> 
  				</p:column>
  				<p:column headerText="Ativo"> 
- 					<h:outputText value="#{aluno.ativo}"/> 
- 				</p:column> 
+ 					<h:outputText value="#{aluno.ativo ? 'Sim' : 'Não'}"/> 
+ 				</p:column>
+ 				<p:column>
+ 					<p:commandButton icon="editar-icon" action="#{alunoBean.editar(aluno)}"
+ 						update=":aluno_form"/>
+ 				</p:column>
  			</p:dataTable> 
 			
 	</p:panel>

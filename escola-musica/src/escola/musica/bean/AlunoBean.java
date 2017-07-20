@@ -1,18 +1,20 @@
 package escola.musica.bean;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import escola.musica.dao.GenericDAO;
 import escola.musica.modelo.Aluno;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class AlunoBean implements Serializable {
 
 	/**
@@ -51,6 +53,16 @@ public class AlunoBean implements Serializable {
 	public void voltar(){
 		
 		this.aluno = null;
+	}
+	
+	public String getDataAtual(){
+		
+		// Intacia o calendar pois é um inbterface
+		Calendar calendar = Calendar.getInstance();
+		// Pega a data atual menos 6 anos
+		calendar.add(Calendar.YEAR, -6);
+		// formata a data e retorna
+		return new SimpleDateFormat("dd/MM/yyyy").format(calendar.getTime());
 	}
 	
 	public Aluno getAluno() {

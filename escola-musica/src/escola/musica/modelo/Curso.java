@@ -1,5 +1,6 @@
 package escola.musica.modelo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -13,8 +14,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-public class Curso {
+public class Curso implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3223617028339662203L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;	
