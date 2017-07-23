@@ -41,9 +41,10 @@ public class Endereco {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	//ManyToone para relacionar a tabela no banco n para 1
-	@ManyToOne
-	//Colocar o nome na coluna da tabela enderço para pode indentificar no banco
+	//@ManyToone: para relacionar a tabela no banco n para 1
+	//@JoinColumn(name = "id_cidade"): Colocar o nome na coluna da tabela
+	//enderço para pode indentificar no banco
+	@ManyToOne	
 	@JoinColumn(name = "id_cidade")
 	public Cidade getCidade() {
 		return cidade;

@@ -22,8 +22,6 @@ public class Aluno implements Serializable{
 
 	private static final long serialVersionUID = 4675028755655124230L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String nome;
 	private Date dataNascimento;
@@ -33,6 +31,8 @@ public class Aluno implements Serializable{
 	private String telefone;
 	private Endereco endereco = new Endereco();
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getId() {
 		return id;
 	}

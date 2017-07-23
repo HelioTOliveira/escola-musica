@@ -20,8 +20,7 @@ public class Curso implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 3223617028339662203L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private Integer id;	
 	private String nome;
 	private String descricao;
@@ -38,6 +37,8 @@ public class Curso implements Serializable{
 		this.dataCriacao = dataCriacao;
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getId() {
 		return id;
 	}

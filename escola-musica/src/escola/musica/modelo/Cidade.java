@@ -16,8 +16,7 @@ public class Cidade implements Serializable{
 
 	private static final long serialVersionUID = -6742128311507392756L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private Integer id;
 	private String nome;
 	private Estado estado;
@@ -32,7 +31,8 @@ public class Cidade implements Serializable{
 		this.estado = estado;
 	}
 
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getId() {
 		return id;
 	}
