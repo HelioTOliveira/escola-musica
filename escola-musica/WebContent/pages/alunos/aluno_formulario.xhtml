@@ -50,7 +50,8 @@
 				<h:panelGroup id="combo-cidades-group">					
 					<p:selectOneMenu id="combo-cidades" value="#{alunoBean.aluno.endereco.cidade}"
 					 		rendered="#{alunoBean.aluno.endereco.cidade.estado != null}"
-					 		converter="cidadeConverter">
+					 		converter="cidadeEntityConverter">
+					 		<!-- converter="cidadeConverter"-->
 						<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
 						<f:selectItems value="#{alunoBean.cidadesDoEstado}" var="cidade"
 							itemLabel="#{cidade.nome}" itemValue="#{cidade}"/>

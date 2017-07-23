@@ -46,6 +46,7 @@ public class Endereco {
 	//enderço para pode indentificar no banco
 	@ManyToOne	
 	@JoinColumn(name = "id_cidade")
+	@NotNull(message="Selecione a cidade")
 	public Cidade getCidade() {
 		return cidade;
 	}
