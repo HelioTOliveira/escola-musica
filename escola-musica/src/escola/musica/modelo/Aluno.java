@@ -1,5 +1,7 @@
 package escola.musica.modelo;
 
+import java.beans.Transient;
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,19 +11,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
+import org.apache.poi.util.BinaryTree;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 @Entity
-public class Aluno implements Serializable{
+public class Aluno implements Serializable {
 
 	private static final long serialVersionUID = 4675028755655124230L;
-	
+
 	private Integer id;
 	private String nome;
 	private Date dataNascimento;
@@ -30,6 +36,8 @@ public class Aluno implements Serializable{
 	private boolean ativo;
 	private String telefone;
 	private Endereco endereco = new Endereco();
+	private byte[] foto;
+	private StreamedContent imagen;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,7 +48,8 @@ public class Aluno implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@NotEmpty(message="Preencha o nome")
+
+	@NotEmpty(message = "Preencha o nome")
 	public String getNome() {
 		return nome;
 	}
@@ -48,11 +57,11 @@ public class Aluno implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento")
-	@NotNull(message="informa a data de nascimento")
-	@Past(message="Informe uma data menor ou igual a data atual")
+	@NotNull(message = "informa a data de nascimento")
+	@Past(message = "Informe uma data menor ou igual a data atual")
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
@@ -60,7 +69,7 @@ public class Aluno implements Serializable{
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
+
 	public String getCpf() {
 		return cpf;
 	}
@@ -68,7 +77,8 @@ public class Aluno implements Serializable{
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	@Email(message="Informe um email válido")
+
+	@Email(message = "Informe um email válido")
 	public String getEmail() {
 		return email;
 	}
@@ -92,6 +102,7 @@ public class Aluno implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
 	// ultilizar o endereço como parte da classe aluno no hibernate
 	@Embedded
 	public Endereco getEndereco() {
@@ -102,4 +113,51 @@ public class Aluno implements Serializable{
 		this.endereco = endereco;
 	}
 	
+	@Lob
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+	// Para não criar uma coluna no banco de dados
+	@Transient
+	public StreamedContent getImagen() {
+		if(this.getFoto() != null){
+			return new DefaultStreamedContent(
+					new ByteArrayInputStream(this.getFoto()));
+		}
+		return new DefaultStreamedContent();
+	}
+
+	public void setImagen(StreamedContent imagen) {
+		this.imagen = imagen;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Aluno other = (Aluno) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
 }
