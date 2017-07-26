@@ -1,6 +1,5 @@
 package escola.musica.modelo;
 
-import java.beans.Transient;
 import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.Date;
@@ -14,10 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
-import org.apache.poi.util.BinaryTree;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.primefaces.model.DefaultStreamedContent;

@@ -10,6 +10,11 @@
 	<p:panel header="Casdastro de Alunos" rendered="#{alunoBean.aluno != null}">
 		<p:panel header="Dados do Aluno">
 			<p:panelGrid columns="2">
+				<h:outputText value="Imagem: "/>
+				<p:fileUpload fileUploadListener="#{alunoBean.enviarFoto}" auto="true"/>
+				<h:outputText value="Prévia: "/>
+				<p:graphicImage value="#{alunoBean.aluno.imagen}" cache="false"
+					style="width:100px; height:100px"/>
 				<h:outputText value="Nome: "/>
 				<p:inputText value="#{alunoBean.aluno.nome}" size="30"/>
 				<h:outputText value="Data Nascimento: "/>
