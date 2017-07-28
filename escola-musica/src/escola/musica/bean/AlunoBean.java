@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -13,6 +14,8 @@ import javax.faces.context.FacesContext;
 
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import escola.musica.dao.CidadeDAO;
 import escola.musica.dao.GenericDAO;
@@ -89,6 +92,19 @@ public class AlunoBean implements Serializable {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+	}
+	
+	public StreamedContent getImagemAluno(){
+		Map<String, String> mapaParametros = FacesContext.getCurrentInstance().getExternalContext()
+				.getRequestParameterMap();
+		String idAluno = mapaParametros.get("id_aluno");
+		if(idAluno != null){
+			Aluno alunoBanco = new GenericDAO<Aluno>(Aluno.class)
+					.obterPorId(new Integer(idAluno));
+			return alunoBanco.getImagem();
+		}
+		
+		return new DefaultStreamedContent();
 	}
 	
 	public Aluno getAluno() {
