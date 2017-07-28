@@ -36,8 +36,8 @@ public class Aluno implements Serializable {
 	private String telefone;
 	private Endereco endereco = new Endereco();
 	private byte[] foto;
-	private StreamedContent imagen;
-
+	private StreamedContent imagem;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getId() {
@@ -122,7 +122,7 @@ public class Aluno implements Serializable {
 	}
 	// Para não criar uma coluna no banco de dados
 	@Transient
-	public StreamedContent getImagen() {
+	public StreamedContent getImagem() {
 		if(this.getFoto() != null){
 			return new DefaultStreamedContent(
 					new ByteArrayInputStream(this.getFoto()));
@@ -130,8 +130,8 @@ public class Aluno implements Serializable {
 		return new DefaultStreamedContent();
 	}
 
-	public void setImagen(StreamedContent imagen) {
-		this.imagen = imagen;
+	public void setImagem(StreamedContent imagem) {
+		this.imagem = imagem;
 	}
 
 	@Override
