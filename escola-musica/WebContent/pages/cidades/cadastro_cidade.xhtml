@@ -16,8 +16,9 @@
 				<p:toolbar>
 					<f:facet name="left">
 						<p:commandButton  value="Nova" icon="ui-icon-document" oncomplete="PF('cadastroCidadeDialog').show()"
-							process="@this"/>
-
+							process="@this" update="cidade-dialog">
+							<p:resetInput target="cidade-dialog"/>
+						</p:commandButton>
 						<span class="ui-separator"> <span
 							class="ui-icon ui-icon-grip-dotted-vertical" />
 						</span>
@@ -46,7 +47,7 @@
 				<p:dialog header="Nova Cidade" widgetVar="cadastroCidadeDialog" modal="true"
 					resizable="false" draggable="false" id="cidade-dialog" closeOnEscape="true"
 					width="400" >
-					<h:panelGrid columns="2" cellpadding="5">
+					<h:panelGrid columns="2" cellpadding="5" id="cidade-grid">
 						<h:outputText value="Nome: "/>
 						<p:inputText value="#{cidadeBean.cidade.nome}"/>
 						<h:outputLabel value="Estado: "/>
@@ -56,12 +57,12 @@
 								itemLabel="#{estado.label}" itemValue="#{estado}"/>
 						</p:selectOneMenu>
 					</h:panelGrid>
-					<p:commandButton value="Salvar" icon="ui-icon-disk" 
-						action="#{cidadeBean.salvar}" oncomplete="PF('cadastroCidadeDialog').hide()"
-							update="tabela-cidades"/>
+					<p:commandButton value="Salvar" icon="ui-icon-disk" action="#{cidadeBean.salvar}"
+						 oncomplete="if(!args.validationFailed) PF('cadastroCidadeDialog').hide()"
+							update="tabela-cidades cidade-grid"/>
 					<p:commandButton value="Cancelar" icon="ui-icon-close"
 						style="margin-left:8px;" oncomplete="PF('cadastroCidadeDialog').hide()"
-						immediate="true" action="#{cidaeBean.cancelar}"/>
+						immediate="true" action="#{cidadeBean.cancelar}"/>
 				</p:dialog>
 			</h:form>
 		</p:panel>

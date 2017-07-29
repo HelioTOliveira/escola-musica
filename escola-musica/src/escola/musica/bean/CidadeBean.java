@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
+import org.primefaces.context.RequestContext;
 
 import escola.musica.dao.GenericDAO;
 import escola.musica.modelo.Cidade;
@@ -33,6 +34,8 @@ public class CidadeBean implements Serializable{
 				new FacesMessage("Cidade cadastrada com sucesso!"));
 		cidade = new Cidade();
 		consultar();
+		//esconde o Dialog caso passe pela validação
+		//RequestContext.getCurrentInstance().execute("PF('cadastroCidadeDialog').hide()");
 	}
 	
 	public void cancelar(){
