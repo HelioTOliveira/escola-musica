@@ -20,7 +20,7 @@ public class CidadeBean implements Serializable{
 
 	private static final long serialVersionUID = -8077768006424832717L;
 	
-	private Cidade cidade;
+	private Cidade cidade = new Cidade();
 	private List<Cidade> cidades;
 	
 	public void iniciarBean(){		        
@@ -31,10 +31,11 @@ public class CidadeBean implements Serializable{
 		new GenericDAO<Cidade>(Cidade.class).salvar(cidade);
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage("Cidade cadastrada com sucesso!"));
+		cidade = new Cidade();
 		consultar();
 	}
 	
-	public void novaCidade(){
+	public void cancelar(){
 		cidade = new Cidade();
 	}
 	

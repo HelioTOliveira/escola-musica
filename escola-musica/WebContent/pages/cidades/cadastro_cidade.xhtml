@@ -11,11 +11,12 @@
 
 	<ui:define name="principal">
 		<p:panel header="Cadastro de Cidades">
-			<form id="form-cidade">
+			<h:form id="form-cidade" >
+				<p:growl id="msgs" autoUpdate="true"/>
 				<p:toolbar>
 					<f:facet name="left">
 						<p:commandButton  value="Nova" icon="ui-icon-document" oncomplete="PF('cadastroCidadeDialog').show()"
-							action="#{cidadeBean.novaCidade}" process="@this"/>
+							process="@this"/>
 
 						<span class="ui-separator"> <span
 							class="ui-icon ui-icon-grip-dotted-vertical" />
@@ -27,7 +28,7 @@
 					
 				</p:toolbar>
 				<br/>
-				<p:dataTable value="#{cidadeBean.cidades}" var="cidade"
+				<p:dataTable value="#{cidadeBean.cidades}" var="cidade" id="tabela-cidades"
 					style="width:50%;" paginator="true" rows="50"
 					rowsPerPageTemplate="25,50,100"
 					paginatorTemplate="{CurrentPageReport} 
@@ -43,13 +44,26 @@
 				</p:dataTable>
 				
 				<p:dialog header="Nova Cidade" widgetVar="cadastroCidadeDialog" modal="true"
-					resizable="false" draggable="false" id="cidade-dialog" closeOnEscape="true">
-					<h:panelGrid columns="2">
+					resizable="false" draggable="false" id="cidade-dialog" closeOnEscape="true"
+					width="400" >
+					<h:panelGrid columns="2" cellpadding="5">
 						<h:outputText value="Nome: "/>
 						<p:inputText value="#{cidadeBean.cidade.nome}"/>
+						<h:outputLabel value="Estado: "/>
+						<p:selectOneMenu value="#{cidadeBean.cidade.estado}">
+							<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
+							<f:selectItems value="#{cidadeBean.estados}" var="estado" 
+								itemLabel="#{estado.label}" itemValue="#{estado}"/>
+						</p:selectOneMenu>
 					</h:panelGrid>
+					<p:commandButton value="Salvar" icon="ui-icon-disk" 
+						action="#{cidadeBean.salvar}" oncomplete="PF('cadastroCidadeDialog').hide()"
+							update="tabela-cidades"/>
+					<p:commandButton value="Cancelar" icon="ui-icon-close"
+						style="margin-left:8px;" oncomplete="PF('cadastroCidadeDialog').hide()"
+						immediate="true" action="#{cidaeBean.cancelar}"/>
 				</p:dialog>
-			</form>
+			</h:form>
 		</p:panel>
 	</ui:define>
 
