@@ -1,7 +1,6 @@
 <!DOCTYPE html >
 
-<ui:composition 
-	template="/pages/layout/template.xhtml"
+<ui:composition template="/pages/layout/template.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -9,18 +8,48 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="titulo">Cidades</ui:define>
-	
+
 	<ui:define name="principal">
 		<p:panel header="Cadastro de Cidades">
-			
-			<p:dataTable value="#{cidadeBean.cidades}" var="cidade" style="width:50%;">
-				<p:column headerText="Nome">
-					<h:outputText value="#{cidade.nome}"/>
-				</p:column>
-				<p:column headerText="Estado" style="width:35%">
-					<h:outputText value="#{cidade.estado.label}"/>
-				</p:column>
-			</p:dataTable>
+			<form id="form-cidade">
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton  value="Nova" icon="ui-icon-document" oncomplete="PF('cadastroCidadeDialog').show()"
+							action="#{cidadeBean.novaCidade}" process="@this"/>
+
+						<span class="ui-separator"> <span
+							class="ui-icon ui-icon-grip-dotted-vertical" />
+						</span>
+
+						<p:commandButton  title="Editar" icon="ui-icon-pencil" />
+						<p:commandButton  title="Excluir" icon="ui-icon-trash" />
+					</f:facet>
+					
+				</p:toolbar>
+				<br/>
+				<p:dataTable value="#{cidadeBean.cidades}" var="cidade"
+					style="width:50%;" paginator="true" rows="50"
+					rowsPerPageTemplate="25,50,100"
+					paginatorTemplate="{CurrentPageReport} 
+					{FirstPageLink}	{PreviousPageLink} {PageLinks} {NextPageLink} 
+					{LastPageLink} {RowsPerPageDropdown}">
+					<p:column headerText="Nome" filterBy="#{cidade.nome}"
+						filterMatchMode="contains" sortBy="#{cidae.nome}">
+						<h:outputText value="#{cidade.nome}" />
+					</p:column>
+					<p:column headerText="Estado" style="width:35%">
+						<h:outputText value="#{cidade.estado.label}" />
+					</p:column>
+				</p:dataTable>
+				
+				<p:dialog header="Nova Cidade" widgetVar="cadastroCidadeDialog" modal="true"
+					resizable="false" draggable="false" id="cidade-dialog" closeOnEscape="true">
+					<h:panelGrid columns="2">
+						<h:outputText value="Nome: "/>
+						<p:inputText value="#{cidadeBean.cidade.nome}"/>
+					</h:panelGrid>
+				</p:dialog>
+			</form>
 		</p:panel>
 	</ui:define>
 
