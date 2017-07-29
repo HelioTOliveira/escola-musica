@@ -19,22 +19,22 @@
 		rowsPerPageTemplate="5,10,15"
 		paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
 				 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-		<p:column>
+		<p:column style="text-align:center; width:50px">
 			<p:graphicImage value="#{alunoBean.imagemAluno}" width="60"
-				height="60" cache="false">
+				height="60" cache="false" rendered="#{aluno.foto != null}">
 				<f:param name="id_aluno" value="#{aluno.id}" />
-			</p:graphicImage>
+			</p:graphicImage>			
 		</p:column>
 		<p:column headerText="Nome" style="width:300px">
 			<h:outputLink id="foto" value="#">
 				<h:outputText value="#{aluno.nome}" />
 			</h:outputLink>
-			<p:tooltip id="toolTipFoto" for="foto" showEffect="clip" hideEffect="slide"
-				rendered="#{aluno.foto !=null}">
+			<p:tooltip id="toolTipFoto" for="foto" showEffect="clip" hideEffect="slide"	>
 				<p:graphicImage value="#{alunoBean.imagemAluno}" width="180"
-					height="180" cache="false">
-					<f:param name="id_aluno" value="#{aluno.id}" />
+					height="180" cache="false" rendered="#{aluno.foto !=null}">
+					<f:param name="id_aluno" value="#{aluno.id}"/>
 				</p:graphicImage>
+				<h:outputText value="Sem foto" rendered="#{aluno.foto ==null}"/>
 			</p:tooltip>
 		</p:column>
 		<p:column headerText="CPF" style="width:120px">
