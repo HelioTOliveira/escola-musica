@@ -8,7 +8,6 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="titulo">Cidades</ui:define>
-
 	<ui:define name="principal">
 		<p:panel header="Cadastro de Cidades">
 			<h:form id="form-cidade" >
@@ -25,11 +24,12 @@
 
 						<p:commandButton  title="Editar" icon="ui-icon-pencil" disabled="#{cidadeBean.cidadeSelecionada == null}"
 							oncomplete="PF('cadastroCidadeDialog').show()" process="@this" update="cidade-dialog">
-						
+						<p:resetInput target="cidade-dialog"/>
 						<f:setPropertyActionListener value="#{cidadeBean.cidadeSelecionada}" target="#{cidadeBean.cidade}"/>	
 						</p:commandButton>							
 						
-						<p:commandButton  title="Excluir" icon="ui-icon-trash" disabled="#{cidadeBean.cidadeSelecionada == null}"/>
+						<p:commandButton  title="Excluir" icon="ui-icon-trash" disabled="#{cidadeBean.cidadeSelecionada == null}"
+							oncomplete="PF('esclusaoCidadeDialog').show()" process="@this"/>
 					</f:facet>
 					
 				</p:toolbar>
@@ -76,6 +76,19 @@
 						style="margin-left:8px;" oncomplete="PF('cadastroCidadeDialog').hide()"
 						process="@this" action="#{cidadeBean.cancelar}" update="tabela-cidades toolbar"/>
 				</p:dialog>
+				
+				<p:confirmDialog message="Deseja realmente excluir esta cidade ?" widgetVar="esclusaoCidadeDialog"
+					header="Excluir Cidade">
+					
+					<p:commandButton value="Sim" action="#{cidadeBean.excluir}" process="@this" 
+						oncomplete="PF('esclusaoCidadeDialog').hide()" update="toolbar tabela-cidades"/>
+						
+						<p:commandButton value="Não" oncomplete="PF('esclusaoCidadeDialog').hide()" process="@this"
+							update="toolbar tabela-cidades">
+							<f:setPropertyActionListener value="#{null}" target="#{cidadeBean.cidadeSelecionada}"/>
+						</p:commandButton>
+				
+				</p:confirmDialog>
 			</h:form>
 		</p:panel>
 	</ui:define>
