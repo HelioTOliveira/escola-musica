@@ -13,7 +13,7 @@
 		<p:panel header="Cadastro de Cidades">
 			<h:form id="form-cidade" >
 				<p:growl id="msgs" autoUpdate="true"/>
-				<p:toolbar>
+				<p:toolbar id="toolbar">
 					<f:facet name="left">
 						<p:commandButton  value="Nova" icon="ui-icon-document" oncomplete="PF('cadastroCidadeDialog').show()"
 							process="@this" update="cidade-dialog">
@@ -23,8 +23,8 @@
 							class="ui-icon ui-icon-grip-dotted-vertical" />
 						</span>
 
-						<p:commandButton  title="Editar" icon="ui-icon-pencil" />
-						<p:commandButton  title="Excluir" icon="ui-icon-trash" />
+						<p:commandButton  title="Editar" icon="ui-icon-pencil" disabled="#{cidadeBean.cidadeSelecionada == null}"/>
+						<p:commandButton  title="Excluir" icon="ui-icon-trash" disabled="#{cidadeBean.cidadeSelecionada == null}"/>
 					</f:facet>
 					
 				</p:toolbar>
@@ -34,7 +34,14 @@
 					rowsPerPageTemplate="25,50,100"
 					paginatorTemplate="{CurrentPageReport} 
 					{FirstPageLink}	{PreviousPageLink} {PageLinks} {NextPageLink} 
-					{LastPageLink} {RowsPerPageDropdown}">
+					{LastPageLink} {RowsPerPageDropdown}" selection="#{cidadeBean.cidadeSelecionada}" 
+					selectionMode="single" rowKey="#{cidade.id}">
+					
+					<!--atualiza o botão quando escolher uma linha -->
+					<p:ajax event="rowSelect" update=":form-cidade:toolbar"/>
+					<!--atualiza o botão quando deselecionar a linha -->
+					<p:ajax event="rowUnselect" update=":form-cidade:toolbar"/>
+					
 					<p:column headerText="Nome" filterBy="#{cidade.nome}"
 						filterMatchMode="contains" sortBy="#{cidae.nome}">
 						<h:outputText value="#{cidade.nome}" />
