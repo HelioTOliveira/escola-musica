@@ -33,6 +33,7 @@ public class CidadeBean implements Serializable{
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage("Cidade cadastrada com sucesso!"));
 		cidade = new Cidade();
+		cidadeSelecionada = null;
 		consultar();
 		//esconde o Dialog caso passe pela validação
 		//RequestContext.getCurrentInstance().execute("PF('cadastroCidadeDialog').hide()");
@@ -40,6 +41,7 @@ public class CidadeBean implements Serializable{
 	
 	public void cancelar(){
 		cidade = new Cidade();
+		cidadeSelecionada = null;
 	}
 	
 	public void consultar(){

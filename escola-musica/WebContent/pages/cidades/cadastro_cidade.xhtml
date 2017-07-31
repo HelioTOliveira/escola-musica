@@ -23,7 +23,12 @@
 							class="ui-icon ui-icon-grip-dotted-vertical" />
 						</span>
 
-						<p:commandButton  title="Editar" icon="ui-icon-pencil" disabled="#{cidadeBean.cidadeSelecionada == null}"/>
+						<p:commandButton  title="Editar" icon="ui-icon-pencil" disabled="#{cidadeBean.cidadeSelecionada == null}"
+							oncomplete="PF('cadastroCidadeDialog').show()" process="@this" update="cidade-dialog">
+						
+						<f:setPropertyActionListener value="#{cidadeBean.cidadeSelecionada}" target="#{cidadeBean.cidade}"/>	
+						</p:commandButton>							
+						
 						<p:commandButton  title="Excluir" icon="ui-icon-trash" disabled="#{cidadeBean.cidadeSelecionada == null}"/>
 					</f:facet>
 					
@@ -56,9 +61,9 @@
 					width="400" >
 					<h:panelGrid columns="2" cellpadding="5" id="cidade-grid">
 						<h:outputText value="Nome: "/>
-						<p:inputText value="#{cidadeBean.cidade.nome}"/>
+						<p:inputText value="#{cidadeBean.cidade.nome}" size="30"/>
 						<h:outputLabel value="Estado: "/>
-						<p:selectOneMenu value="#{cidadeBean.cidade.estado}">
+						<p:selectOneMenu value="#{cidadeBean.cidade.estado}" style="width:200px;">
 							<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
 							<f:selectItems value="#{cidadeBean.estados}" var="estado" 
 								itemLabel="#{estado.label}" itemValue="#{estado}"/>
@@ -66,10 +71,10 @@
 					</h:panelGrid>
 					<p:commandButton value="Salvar" icon="ui-icon-disk" action="#{cidadeBean.salvar}"
 						 oncomplete="if(!args.validationFailed) PF('cadastroCidadeDialog').hide()"
-							update="tabela-cidades cidade-grid"/>
+							update="tabela-cidades cidade-grid toolbar"/>
 					<p:commandButton value="Cancelar" icon="ui-icon-close"
 						style="margin-left:8px;" oncomplete="PF('cadastroCidadeDialog').hide()"
-						immediate="true" action="#{cidadeBean.cancelar}"/>
+						process="@this" action="#{cidadeBean.cancelar}" update="tabela-cidades toolbar"/>
 				</p:dialog>
 			</h:form>
 		</p:panel>
