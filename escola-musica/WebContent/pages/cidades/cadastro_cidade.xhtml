@@ -40,19 +40,46 @@
 					paginatorTemplate="{CurrentPageReport} 
 					{FirstPageLink}	{PreviousPageLink} {PageLinks} {NextPageLink} 
 					{LastPageLink} {RowsPerPageDropdown}" selection="#{cidadeBean.cidadeSelecionada}" 
-					selectionMode="single" rowKey="#{cidade.id}">
+					selectionMode="single" rowKey="#{cidade.id}" editable="true">
 					
 					<!--atualiza o botão quando escolher uma linha -->
 					<p:ajax event="rowSelect" update=":form-cidade:toolbar"/>
 					<!--atualiza o botão quando deselecionar a linha -->
 					<p:ajax event="rowUnselect" update=":form-cidade:toolbar"/>
 					
+					<p:ajax event="rowEdit" listener="#{cidadeBean.onRowEdit}" update="tabela-cidades :form-cidade:msgs"/>
+					
 					<p:column headerText="Nome" filterBy="#{cidade.nome}"
 						filterMatchMode="contains" sortBy="#{cidae.nome}">
-						<h:outputText value="#{cidade.nome}" />
+						<!--para editar na propria coluna -->
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{cidade.nome}"/>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{cidade.nome}" style="width:98%;"/>
+							</f:facet>
+						</p:cellEditor>
+						
 					</p:column>
 					<p:column headerText="Estado" style="width:35%">
-						<h:outputText value="#{cidade.estado.label}" />
+						<!--para editar na propria coluna -->
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{cidade.estado.label}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:selectOneMenu value="#{cidade.estado}" style="width:200px;" filter="true" filterMatchMode="contains">
+									<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
+									<f:selectItems value="#{cidadeBean.estados}" var="estado" 
+										itemLabel="#{estado.label}" itemValue="#{estado}"/>
+						</p:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
+						
+					</p:column>
+					<p:column style="width:40px; text-align:center;">
+						<p:rowEditor/>
 					</p:column>
 				</p:dataTable>
 				
