@@ -32,7 +32,8 @@
 							oncomplete="PF('esclusaoCidadeDialog').show()" process="@this"/>
 					</f:facet>
 					
-				</p:toolbar>
+				</p:toolbar>			
+				
 				<br/>
 				<p:dataTable value="#{cidadeBean.cidades}" var="cidade" id="tabela-cidades"
 					style="width:50%;" paginator="true" rows="50"
@@ -40,14 +41,19 @@
 					paginatorTemplate="{CurrentPageReport} 
 					{FirstPageLink}	{PreviousPageLink} {PageLinks} {NextPageLink} 
 					{LastPageLink} {RowsPerPageDropdown}" selection="#{cidadeBean.cidadeSelecionada}" 
-					selectionMode="single" rowKey="#{cidade.id}" editable="true">
+					selectionMode="single" rowKey="#{cidade.id}" editable="true" editMode="cell">
 					
 					<!--atualiza o botão quando escolher uma linha -->
 					<p:ajax event="rowSelect" update=":form-cidade:toolbar"/>
 					<!--atualiza o botão quando deselecionar a linha -->
 					<p:ajax event="rowUnselect" update=":form-cidade:toolbar"/>
 					
+					<!-- evento para atualiza as cidade quando clica no editar ao lado da cidade -->
 					<p:ajax event="rowEdit" listener="#{cidadeBean.onRowEdit}" update="tabela-cidades :form-cidade:msgs"/>
+					
+					<!-- evendo para atualiza as cidades quando clica na linha -->
+					<p:ajax event="cellEdit" listener="#{cidadeBean.onCellEdit}" update="tabela-cidades :form-cidade:msgs"/>
+					
 					
 					<p:column headerText="Nome" filterBy="#{cidade.nome}"
 						filterMatchMode="contains" sortBy="#{cidae.nome}">

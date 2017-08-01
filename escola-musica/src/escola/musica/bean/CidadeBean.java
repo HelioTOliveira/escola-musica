@@ -9,6 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.component.datatable.DataTable;
+import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 import escola.musica.dao.GenericDAO;
@@ -53,6 +55,12 @@ public class CidadeBean implements Serializable{
 	
 	public void onRowEdit(RowEditEvent event){
 		cidade = (Cidade) event.getObject();
+		salvar();
+	}
+	
+	public void onCellEdit(CellEditEvent event){
+		DataTable table = (DataTable) event.getSource();
+		cidade = (Cidade) table.getRowData();
 		salvar();
 	}
 	
