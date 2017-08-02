@@ -8,9 +8,14 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 	
-	<!-- Configuração do Spring "applicationContext.xml"-->
+	<!-- Configuração do Spring "applicationContext.xml" para o servidor inicializar o spring-->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!--Para o Spring gerenciar as requisições da aplicação-->
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 	
 	<!-- Configuração do JSF-->
