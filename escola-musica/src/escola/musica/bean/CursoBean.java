@@ -8,17 +8,18 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import escola.musica.dao.CursoDAO;
-import escola.musica.dao.GenericDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
 import escola.musica.modelo.Curso;
 import escola.musica.modelo.TipoCurso;
+import escola.musica.servico.CursoServico;
 
-@ManagedBean
-@ViewScoped
+@Controller
+@Scope("session")
 public class CursoBean implements Serializable{
 
 	private static final long serialVersionUID = -862660658464075437L;
@@ -31,6 +32,9 @@ public class CursoBean implements Serializable{
 	private Curso cursoExclusao;
 	private List<Curso> cursosFiltrados;
 	
+	//Com anotação o proprio spring faz a intancia do objeto
+	@Autowired
+	private CursoServico cursoServico;
 
 //	public CursoBean(){
 //		cursos = new CursoDAO().listarTodos();
@@ -38,18 +42,10 @@ public class CursoBean implements Serializable{
 //		curso = new Curso();
 //	}
 	
-	public Curso getCursoExclusao() {
-		return cursoExclusao;
-	}
-
-	public void setCursoExclusao(Curso cursoExclusao) {
-		this.cursoExclusao = cursoExclusao;
-	}
-
 	public void iniciarBean(){
 		
-		cursos = new CursoDAO().listarTodos();
-		cursosAccordion = CursoDAO.listarCursosAccordion();		
+		cursos = cursoServico.listarTodos();
+		cursosAccordion = cursoServico.listarCursosAccordin();		
 	}
 	
 	public void novoCurso(){
@@ -68,9 +64,9 @@ public class CursoBean implements Serializable{
 	public void salvar()throws InterruptedException{ 
 		
 		Thread.sleep(2000);
-		new GenericDAO<Curso>(Curso.class).salvar(curso);
+		cursoServico.salvar(curso);
 		//new CursoDAO().salvar(curso);
-		cursos = new GenericDAO<Curso>(Curso.class).listarTodos();
+		cursos = cursoServico.listarTodos();
 		//cursos = new CursoDAO().listarTodos();
 		curso = null;
 		
@@ -91,10 +87,10 @@ public class CursoBean implements Serializable{
 	
 	public void excluir(){
 		
-		new CursoDAO().excluir(cursoExclusao);
+		cursoServico.excluir(cursoExclusao);
 		FacesContext.getCurrentInstance()
 			.addMessage(null, new FacesMessage("Curso excluído com Sucesso"));
-		cursos = new CursoDAO().listarTodos();
+		cursos = cursoServico.listarTodos();
 		cursosFiltrados = null;
 	}
 	
@@ -138,5 +134,14 @@ public class CursoBean implements Serializable{
 	public void setCursosFiltrados(List<Curso> cursosFiltrados) {
 		this.cursosFiltrados = cursosFiltrados;
 	}
+	
+	public Curso getCursoExclusao() {
+		return cursoExclusao;
+	}
+
+	public void setCursoExclusao(Curso cursoExclusao) {
+		this.cursoExclusao = cursoExclusao;
+	}
+
 	
 }

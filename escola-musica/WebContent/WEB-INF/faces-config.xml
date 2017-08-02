@@ -8,7 +8,7 @@
     
     <!-- o Spring vai passar a resover a espretion name agora vai engetar os beans-->
     <application>
-    	<el-resolver>org.springframework.web.jsf.el.SpringbeanFacesELResolver</el-resolver>
+    	<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
     </application>
     
 </faces-config>
