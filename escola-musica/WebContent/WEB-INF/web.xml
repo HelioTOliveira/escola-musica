@@ -7,7 +7,13 @@
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-
+	
+	<!-- Configuração do Spring "applicationContext.xml"-->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- Configuração do JSF-->
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -18,11 +24,13 @@
 		<url-pattern>*.jsf</url-pattern>
 	</servlet-mapping>
 
+	<!-- configuração para deichar a url mais amigavel para o usuário -->
 	<filter>
 		<filter-name>Pretty Filter</filter-name>
 		<filter-class>com.ocpsoft.pretty.PrettyFilter</filter-class>
 	</filter>
 
+<!-- Para ezibir o erro na tela bom para o desenvolvimento do projeto -->
 	<filter-mapping>
 		<filter-name>Pretty Filter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -30,6 +38,7 @@
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
+   <!-- configuração do filtro para fazer upload de arquivos -->
 	<filter>
 		<filter-name>PrimeFaces FileUpload Filter</filter-name>
 		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
@@ -41,14 +50,16 @@
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	
+	<!-- Para mutar o tema do primefaces mudar o layout-->
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>afternoon</param-value>
 	</context-param>
-		
+	
+	<!-- Para ezibir o erro na tela bom para o desenvolvimento do projeto -->
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
 	</context-param>
-		
+	<!-- Para ezibir o erro na tela bom para o desenvolvimento do projeto -->	
 </web-app>
