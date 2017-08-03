@@ -18,12 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import escola.musica.dao.CidadeDAO;
 import escola.musica.dao.GenericDAO;
 import escola.musica.modelo.Aluno;
 import escola.musica.modelo.Cidade;
 import escola.musica.modelo.Estado;
 import escola.musica.servico.AlunoServico;
+import escola.musica.servico.CidadeServico;
 
 @Controller("alunoBean")
 @Scope("session")
@@ -40,6 +40,8 @@ public class AlunoBean implements Serializable {
 	
 	@Autowired
 	private AlunoServico alunoServico;
+	@Autowired
+	private CidadeServico cidadeServico;
 	
 	public void iniciarBean(){
 		alunos = alunoServico.listarTodos();
@@ -84,7 +86,7 @@ public class AlunoBean implements Serializable {
 	
 	public List<Cidade> getCidadesDoEstado(){
 		
-		return CidadeDAO.obetrCidadesDoEstado(aluno.getEndereco().getCidade().getEstado());
+		return cidadeServico.obterCidadesDoEstado(aluno.getEndereco().getCidade().getEstado());
 	}
 	
 	public void enviarFoto(FileUploadEvent event){
