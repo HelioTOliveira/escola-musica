@@ -1,0 +1,19 @@
+<ui:composition 
+    template="/pages/layout/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Matrículas</ui:define>
+	
+	<ui:define name="principal">
+		<h:form id="matricula_form">
+			<p:growl/>
+			<ui:include src="/pages/matriculas/matricula_lista.xhtml"/>
+			<ui:include src="/pages/matriculas/matricula_formulario.xhtml"/>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
