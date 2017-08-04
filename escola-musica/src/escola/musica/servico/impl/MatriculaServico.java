@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import escola.musica.modelo.Matricula;
 
-@Service("matriculaServico")
+@Service(value = "MatriculaServico")
 @Transactional
 public class MatriculaServico implements escola.musica.servico.MatriculaServico {
 
