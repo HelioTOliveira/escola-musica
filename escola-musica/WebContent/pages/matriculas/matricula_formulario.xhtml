@@ -11,18 +11,20 @@
 		
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Número: "/>
-			<p:inputText value="#{matriculaBean.matricula.numero}"/>			
+			<p:inputText value="#{matriculaBean.matricula.numero}" size="10"/>			
 			<h:outputLabel value="Data: "/>
 			<p:calendar value="#{matriculaBean.matricula.dataMatricula}" pattern="dd/MM/yyyy" 
-				mask="99/99/9999"/>
+				mask="99/99/9999" size="10"/>
 			<h:outputLabel value="Aluno: "/>
-			<p:selectOneMenu value="#{matriculaBean.matricula.aluno}" converter="alunoConverter">
+			<p:selectOneMenu value="#{matriculaBean.matricula.aluno}" converter="alunoConverter"
+				 style="weidth:250px;">
 				<f:selectItem itemLabel=":: Selecione ::" itemValue="#{null}"/>
 				<f:selectItems value="#{matriculaBean.alunos}" var="aluno" itemLabel="#{aluno.nome}" 
 					itemValue="#{aluno}"/>
 			</p:selectOneMenu>
 			<h:outputLabel value="Curso: "/>
-			<p:selectOneMenu value="#{matriculaBean.matricula.curso}" converter="cursoConverter">
+			<p:selectOneMenu value="#{matriculaBean.matricula.curso}" converter="cursoConverter"
+				style="weidth:250px;">
 				<f:selectItem itemLabel=":: Selecione ::" itemValue="#{null}"/>
 				<f:selectItems value="#{matriculaBean.cursos}" var="curso" itemLabel="#{curso.nome}" 
 					itemValue="#{curso}"/>
@@ -32,6 +34,7 @@
 		</h:panelGrid>
 	
 		<p:commandButton value="Salvar" icon="salvar-icon" action="#{matriculaBean.salvar}" update="matricula_form"/>
-		<p:commandButton value="Cancelar" action="#{matriculaBean.cancelar}" update="matricula_form"/>
+		<p:commandButton value="Cancelar" icon="cancelar-icon" action="#{matriculaBean.cancelar}" update="matricula_form" 
+			immediate="true"/>
 	</p:panel>
 </html>

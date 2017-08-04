@@ -7,9 +7,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -17,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import escola.musica.modelo.Curso;
 import escola.musica.modelo.TipoCurso;
 import escola.musica.servico.CursoServico;
+import escola.musica.util.Mensagem;
 
 @Controller
 @Scope("session")
@@ -70,8 +68,7 @@ public class CursoBean implements Serializable{
 		//cursos = new CursoDAO().listarTodos();
 		curso = null;
 		
-		FacesContext.getCurrentInstance().addMessage(null, 
-				new FacesMessage("Curso Salvo com Sucesso"));		
+		Mensagem.mensagemInformacao("Curso salvo com sucesso!");		
 	}
 	
 	public void editar(Curso curso){
@@ -88,8 +85,7 @@ public class CursoBean implements Serializable{
 	public void excluir(){
 		
 		cursoServico.excluir(cursoExclusao);
-		FacesContext.getCurrentInstance()
-			.addMessage(null, new FacesMessage("Curso excluído com Sucesso"));
+		Mensagem.mensagemInformacao("Curso excluído com Sucesso");
 		cursos = cursoServico.listarTodos();
 		cursosFiltrados = null;
 	}

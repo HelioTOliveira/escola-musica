@@ -3,9 +3,6 @@ package escola.musica.bean;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -16,6 +13,7 @@ import escola.musica.modelo.Matricula;
 import escola.musica.servico.AlunoServico;
 import escola.musica.servico.CursoServico;
 import escola.musica.servico.MatriculaServico;
+import escola.musica.util.Mensagem;
 
 @Controller("matriculaBean")
 @Scope("session")
@@ -45,12 +43,17 @@ public class MatriculaBean implements Serializable{
 	}
 	
 	public void salvar(){
+		if(matricula.getNumero().length() < 3){
+		
+			Mensagem.mensagemErro("O campo matrícula deve ter no mínimo 3 caracteres");
+			return;
+		}
+		
 		matriculaServico.salvar(matricula);
 		atualizarMatriculas();
 		matricula = null;
 		
-		FacesContext.getCurrentInstance().addMessage(null, 
-				new FacesMessage("Matrícula cadastrada com sucesso"));
+		Mensagem.mensagemInformacao("Matrícula cadastrada com sucesso!");
 	}
 	
 	public void novaMatricula(){
