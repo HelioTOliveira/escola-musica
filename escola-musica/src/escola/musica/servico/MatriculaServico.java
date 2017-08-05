@@ -8,4 +8,5 @@ public interface MatriculaServico {
 
 	public List<Matricula> listarTodas();
 	public void salvar(Matricula matricula);
+	public List<Matricula> listarTodasAtivas();
 }

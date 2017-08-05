@@ -12,7 +12,7 @@ import escola.musica.modelo.Matricula;
 
 @Service(value = "MatriculaServico")
 @Transactional
-public class MatriculaServico implements escola.musica.servico.MatriculaServico {
+public class MatriculaServicoImpl implements escola.musica.servico.MatriculaServico {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -21,9 +21,16 @@ public class MatriculaServico implements escola.musica.servico.MatriculaServico 
 	@Override
 	public List<Matricula> listarTodas() {
 		// TODO Auto-generated method stub
-		return entityManager.createQuery("from Matricula").getResultList();
+		return entityManager.createNamedQuery(Matricula.LISTAR_TODAS).getResultList();
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Matricula> listarTodasAtivas() {
+		// TODO Auto-generated method stub
+		return entityManager.createNamedQuery("Matricula.ListarTodasAtivas").getResultList();
+	}
+	
 	@Override
 	public void salvar(Matricula matricula) {
 		// TODO Auto-generated method stub

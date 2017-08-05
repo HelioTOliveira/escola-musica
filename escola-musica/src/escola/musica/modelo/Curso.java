@@ -28,6 +28,12 @@ public class Curso implements Serializable {
 	private TipoCurso tipo;
 	private Date dataCriacao;
 
+	public Curso(){}
+	
+	public Curso(String nomeCurso) {
+		this.nome = nome;
+	}
+
 	@NotNull(message = "A data de criação deve ser informada")
 	public Date getDataCriacao() {
 		return dataCriacao;
