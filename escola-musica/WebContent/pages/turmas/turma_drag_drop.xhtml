@@ -1,0 +1,27 @@
+<ui:composition 
+    template="/pages/layout/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Turmas Drag Drop</ui:define>
+	
+	<ui:define name="principal">
+		<h:form id="turma_drag_drop_form">
+			<p:fieldset legend="Alunos Matriculados" style="margin-top:10px;">
+				<p:dataGrid value="#{turmaBean.matriculas}" var="matricula" columns="3">
+					<p:panel header="#{matricula.aluno.nome}">
+					
+					</p:panel>
+				 </p:dataGrid>
+			</p:fieldset>
+			
+			<p:fieldset legend="Turma de Teoria -1° Ano" style="margin-top:10px;">
+			
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
