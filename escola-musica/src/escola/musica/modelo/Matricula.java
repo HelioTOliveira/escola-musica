@@ -39,14 +39,19 @@ public class Matricula implements Serializable {
 	private boolean ativo = true;
 	private Date dataDesativacao;
 
-	public static final String LISTAR_TODAS = "from Matricula";
+	//Atraves do contrutor da propria classe
+//	public static final String LISTAR_TODAS = "select new Matricula (id, dataMatricula, numero, aluno.nome, curso.nome)"
+//			+ "from Matricula";
+	//Ou cria uma classe com o contrutor abaixo
+	public static final String LISTAR_TODAS = "select new escola.musica.modelo.MatriculaVO (id, numero, "
+			+ "dataMatricula, aluno.nome, curso.nome) from Matricula";
 	
 	public Matricula(){}
 	
-	public Matricula(Integer id, Date dataMatricula, String numero, String nomeAluno, String nomeCurso){
+	public Matricula(Integer id, Date data, String numero, String nomeAluno, String nomeCurso){
 		setId(id);
 		setNumero(numero);
-		setDataMatricula(dataMatricula);
+		setDataMatricula(data);
 		setAluno(new Aluno());
 		this.aluno.setNome(nomeAluno);
 		setCurso(new Curso(nomeCurso));
@@ -55,7 +60,7 @@ public class Matricula implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getId() {
-		return id;
+		return id;		
 	}
 
 	public void setId(Integer id) {

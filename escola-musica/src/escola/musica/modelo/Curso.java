@@ -31,7 +31,7 @@ public class Curso implements Serializable {
 	public Curso(){}
 	
 	public Curso(String nomeCurso) {
-		this.nome = nome;
+		this.nome = nomeCurso;
 	}
 
 	@NotNull(message = "A data de criação deve ser informada")

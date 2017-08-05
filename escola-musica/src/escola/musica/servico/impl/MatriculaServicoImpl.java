@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import escola.musica.modelo.Matricula;
+import escola.musica.modelo.MatriculaVO;
 
 @Service(value = "MatriculaServico")
 @Transactional
@@ -19,7 +20,7 @@ public class MatriculaServicoImpl implements escola.musica.servico.MatriculaServ
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Matricula> listarTodas() {
+	public List<MatriculaVO> listarTodas() {
 		// TODO Auto-generated method stub
 		return entityManager.createNamedQuery(Matricula.LISTAR_TODAS).getResultList();
 	}
@@ -35,6 +36,12 @@ public class MatriculaServicoImpl implements escola.musica.servico.MatriculaServ
 	public void salvar(Matricula matricula) {
 		// TODO Auto-generated method stub
 		entityManager.merge(matricula);
+	}
+
+	@Override
+	public Matricula obterPorId(Integer id) {
+		// TODO Auto-generated method stub
+		return entityManager.find(Matricula.class, id);
 	}
 
 }
