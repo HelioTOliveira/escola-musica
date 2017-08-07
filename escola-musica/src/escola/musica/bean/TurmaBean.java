@@ -20,7 +20,7 @@ public class TurmaBean implements Serializable {
 	private static final long serialVersionUID = 374615860770008608L;
 
 	private List<Matricula> matriculas;
-
+	private List<Matricula> matriculasInseridas;
 	@Autowired
 	private MatriculaServico matriculaServico;
 
@@ -35,5 +35,14 @@ public class TurmaBean implements Serializable {
 	public void setMatriculas(List<Matricula> matriculas) {
 		this.matriculas = matriculas;
 	}
+
+	public List<Matricula> getMatriculasInseridas() {
+		return matriculasInseridas;
+	}
+
+	public void setMatriculasInseridas(List<Matricula> matriculasInseridas) {
+		this.matriculasInseridas = matriculasInseridas;
+	}
+	
 
 }

@@ -12,14 +12,42 @@
 		<h:form id="turma_drag_drop_form">
 			<p:fieldset legend="Alunos Matriculados" style="margin-top:10px;">
 				<p:dataGrid value="#{turmaBean.matriculas}" var="matricula" columns="3">
-					<p:panel header="#{matricula.aluno.nome}">
-					
+					<p:panel id="painel-matriculas" header="#{matricula.aluno.nome}">
+						<h:panelGrid columns="2" cellpadding="8">
+							<p:graphicImage value="#{alunoBean.imagemAluno}" width="60"
+								height="60" cache="false" rendered="#{matricula.aluno.foto != null}">
+								<f:param name="id_aluno" value="#{matricula.aluno.id}" />
+							</p:graphicImage>
+							<h:panelGrid columns="2">
+								<h:outputText value="Matrícula: "/>
+								<h:outputText value="#{matricula.numero}"/>
+								<h:outputText value="Curso: "/>
+								<h:outputText value="#{matricula.curso.nome}"/>
+							</h:panelGrid>
+						</h:panelGrid>
 					</p:panel>
+					<p:draggable for="painel-matriculas" revert="true" handle=".ui-panel-titlebar">
+					</p:draggable>
 				 </p:dataGrid>
 			</p:fieldset>
 			
 			<p:fieldset legend="Turma de Teoria -1° Ano" style="margin-top:10px;">
-			
+				<p:outputPanel>
+					<h:outputText value="Arraste a matrícula e solte aqui" style="font-size:20px;"
+						rendered="#{empty turmaBean.matriculasInseridas}"/>
+					<p:dataTable value="#{turmaBean.matriculasInseridas}" var="matricula"
+						rendered="#{not empty turmaBean.matriculasInseridas}">
+						<p:column headerText="Número">
+							<h:outputText value="#{matricula.numero}"/>
+						</p:column>
+						<p:column headerText="Aluno">
+							<h:outputText value="#{matricula.aluno.nome}"/>
+						</p:column>
+						<p:column headerText="Curso">
+							<h:outputText value="#{matricula.curso.nome}"/>
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
 			</p:fieldset>
 		</h:form>
 	</ui:define>
