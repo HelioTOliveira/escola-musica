@@ -7,11 +7,20 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="titulo">Turmas Drag Drop</ui:define>
+	<ui:define name="header">
+		<script type="text/javascript">
+			function handleDrop(event, ui) {
+				var droppedMatricula = ui.draggable;
+				
+				droppedMatricula.fadeOut('fast');
+			}
+		</script>
+	</ui:define>
 	
 	<ui:define name="principal">
 		<h:form id="turma_drag_drop_form">
 			<p:fieldset legend="Alunos Matriculados" style="margin-top:10px;">
-				<p:dataGrid value="#{turmaBean.matriculas}" var="matricula" columns="3">
+				<p:dataGrid id="alunos-matriculados" value="#{turmaBean.matriculas}" var="matricula" columns="3">
 					<p:panel id="painel-matriculas" header="#{matricula.aluno.nome}">
 						<h:panelGrid columns="2" cellpadding="8">
 							<p:graphicImage value="#{alunoBean.imagemAluno}" width="60"
@@ -26,13 +35,13 @@
 							</h:panelGrid>
 						</h:panelGrid>
 					</p:panel>
-					<p:draggable for="painel-matriculas" revert="true" handle=".ui-panel-titlebar">
-					</p:draggable>
+					<p:draggable for="painel-matriculas" revert="true" handle=".ui-panel-titlebar"
+						stack=".ui-panel"></p:draggable>
 				 </p:dataGrid>
 			</p:fieldset>
 			
-			<p:fieldset legend="Turma de Teoria -1° Ano" style="margin-top:10px;">
-				<p:outputPanel>
+			<p:fieldset id="turma" legend="Turma de Teoria -1° Ano" style="margin-top:10px;">
+				<p:outputPanel id="drop-area">
 					<h:outputText value="Arraste a matrícula e solte aqui" style="font-size:20px;"
 						rendered="#{empty turmaBean.matriculasInseridas}"/>
 					<p:dataTable value="#{turmaBean.matriculasInseridas}" var="matricula"
@@ -49,6 +58,11 @@
 					</p:dataTable>
 				</p:outputPanel>
 			</p:fieldset>
+			
+			<p:droppable for="turma" datasource="alunos-matriculados" onDrop="handleDrop" 
+				tolerance="touch" activeStyleClass="ui-state-highlight"> 
+				<p:ajax listener="#{turmaBean.onMatriculaDrop}" update="drop-area alunos-matriculados"></p:ajax>
+			</p:droppable>					  
 		</h:form>
 	</ui:define>
 
