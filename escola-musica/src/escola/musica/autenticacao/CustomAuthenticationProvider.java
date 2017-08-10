@@ -8,10 +8,13 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 
+import escola.musica.modelo.Usuario;
+import escola.musica.servico.UsuarioServico;
+
 @SuppressWarnings("deprecation")
 public class CustomAuthenticationProvider implements AuthenticationProvider{
 
-	Autowired
+	@Autowired
 	private UsuarioServico usuarioServico;
 	@Autowired
 	private PasswordEncoder passwordEncoder;

@@ -28,14 +28,25 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.jsf</url-pattern>
 	</servlet-mapping>
-
-	<!-- configuração para deichar a url mais amigavel para o usuário -->
+	
+	<!-- Filtro para o String Security -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	
+	<!-- configuração para deixar a url mais amigavel para o usuário -->
 	<filter>
 		<filter-name>Pretty Filter</filter-name>
 		<filter-class>com.ocpsoft.pretty.PrettyFilter</filter-class>
 	</filter>
 
-<!-- Para ezibir o erro na tela bom para o desenvolvimento do projeto -->
+<!-- Para exibir o erro na tela bom para o desenvolvimento do projeto -->
 	<filter-mapping>
 		<filter-name>Pretty Filter</filter-name>
 		<url-pattern>/*</url-pattern>
