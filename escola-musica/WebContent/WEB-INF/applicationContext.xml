@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:task="http://www.springframework.org/schema/task"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xmlns:sec="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.0.xsd
@@ -17,18 +18,18 @@
     http://www.springframework.org/schema/security
     http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-	<!-- Configuração para hibernete -->
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="persistenceXmlLocation" value="classpath:/META-INF/persistence.xml" />
-		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="showSql" value="true" />
-				<property name="generateDdl" value="true" />
-			</bean>
-		</property>
-		<property name="jpaProperties">
+	<!-- Configuração para hibernete com spring -->
+	    <bean id="entityManagerFactory"
+			class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+			<property name="dataSource" ref="dataSource" />
+			<property name="persistenceXmlLocation" value="classpath:/META-INF/persistence.xml" />
+			<property name="jpaVendorAdapter">
+				<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+					<property name="showSql" value="true" />
+					<property name="generateDdl" value="true" />
+				</bean>
+			</property>
+			<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
 				<prop key="hibernate.connection.characterEncoding">utf8</prop>
@@ -54,7 +55,7 @@
 	
 	<!--  Seguração utilizando spring security -->
 	<sec:global-method-security secured-annotations="enabled"/>
-	<!-- Recurso que não precisa de segurança -->
+	
 	<sec:http pattern="/css/*" security="none"/>
 	<sec:http pattern="/css/**" security="none"/>
 	<sec:http pattern="/fonts/*" security="none"/>
@@ -66,9 +67,10 @@
 	<sec:http pattern="/pages/login/login.jsf" security="none"/>
 	
 	<sec:http auto-config="true">
-		<sec:form-login login-page="/pages/login/login.jsf" default-target-url="/pages/template/main.jsf"
-			always-use-default-target="false" authentication-failure-handler-ref="authenticationFailureHandler"/>
-		<sec:intercept-url pattern="/**" access="ROLE_USER"/>
+		<sec:form-login login-page="/pages/login/login.jsf"
+			default-target-url="/pages/template/main.jsf" always-use-default-target="false"
+			authentication-failure-handler-ref="authenticationFailureHandler"/>
+		<sec:intercept-url pattern="/**" access="ROLE_USER" />
 		<sec:logout success-handler-ref="logoutHandler" delete-cookies="SPRING_SECURITY_REMEMBER_ME_COOKIE,JSESSIONID"/>
 	</sec:http>
 	
@@ -89,7 +91,6 @@
 		<sec:authentication-provider ref="customAuthenticationProvider" />
 	</sec:authentication-manager>
 	
-	<!-- Classe de criptografia de senha para o Banco de Dados -->
 	<bean id="passwordEncoder"
 		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
 		<constructor-arg value="256" />

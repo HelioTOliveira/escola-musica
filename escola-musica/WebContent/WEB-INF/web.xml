@@ -31,11 +31,11 @@
 	
 	<!-- Filtro para o String Security -->
 	<filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<filter-name>springSecurityFilterChain</filter-name>		
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>		
 	</filter>
 	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-name>springSecurityFilterChain</filter-name>		
 		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
@@ -66,16 +66,16 @@
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	
-	<!-- Para mutar o tema do primefaces mudar o layout-->
+	<!-- Para mudar o tema do primefaces mudar o layout-->
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>afternoon</param-value>
 	</context-param>
 	
-	<!-- Para ezibir o erro na tela bom para o desenvolvimento do projeto -->
+	<!-- Para exibir o erro na tela bom para o desenvolvimento do projeto -->
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
 	</context-param>
-	<!-- Para ezibir o erro na tela bom para o desenvolvimento do projeto -->	
+	<!-- Para exibir o erro na tela bom para o desenvolvimento do projeto -->	
 </web-app>

@@ -17,10 +17,12 @@ public class UsuarioServicoImpl implements UsuarioServico{
 
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Usuario obterUsuarioPeloLogin(String login) {
 		// TODO Auto-generated method stub
-		List<Usuario> usuarios = entityManager.createQuery("from Usuario where login = : login")
+		List<Usuario> usuarios = entityManager.createQuery("from Usuario where login = :login")
 				.setParameter("login", login).getResultList();
 		
 		if(usuarios.isEmpty()){

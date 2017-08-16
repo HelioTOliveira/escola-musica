@@ -1,15 +1,18 @@
 package escola.musica.modelo;
 
-import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
@@ -53,8 +56,9 @@ public class Usuario implements Serializable, UserDetails {
 	@Override
 	@Transient
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+		authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
+		return authorities;
 	}
 
 	@Override
