@@ -2,7 +2,7 @@ package escola.musica.util;
 
 public class GeradorSenhaAleatoria {
 
-	private static String caracteresSenha="ABCDEFGHIJKLMNOPQRSTUWXYZ123456789";
+	private static String caracteresSenha="ABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
 	
 	public static String gerarSenhaAleatoria(int tamanhoSenha) {
 		
