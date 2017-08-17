@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.envers.Audited;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +28,9 @@ public class UsuarioProfessorServicoImpl implements UsuarioProfessorServico{
 	@Audited
 	private UsuarioServico usuarioServico;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Override
 	public void salvar(UsuarioProfessor usuarioProfessor) {
 		// TODO Auto-generated method stub
@@ -37,7 +42,12 @@ public class UsuarioProfessorServicoImpl implements UsuarioProfessorServico{
 		
 		if(usuarioProfessor.getId() == null){
 			String senhaGerada = GeradorSenhaAleatoria.gerarSenhaAleatoria(6);
+			System.out.print(senhaGerada);
+			String senhaCriptografada = passwordEncoder.encodePassword(senhaGerada, null);
+			usuarioProfessor.setSenha(senhaCriptografada);
+			//TODO - Enviar email com login e senha
 		}
+		entityManager.merge(usuarioProfessor);
 	}
 
 	@SuppressWarnings("unchecked")
