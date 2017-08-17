@@ -16,7 +16,7 @@ import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class Usuario implements Serializable, UserDetails {
+public abstract class Usuario implements Serializable, UserDetails {
 
 	/**
 	 * 
@@ -24,8 +24,11 @@ public class Usuario implements Serializable, UserDetails {
 	private static final long serialVersionUID = 6038042678425474900L;
 
 	private Integer id;
+	private String nome;
+	private String email;
 	private String login;
 	private String senha;
+	private boolean ativo;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,6 +54,30 @@ public class Usuario implements Serializable, UserDetails {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override
@@ -100,7 +127,7 @@ public class Usuario implements Serializable, UserDetails {
 	@Transient
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return ativo;
 	}
 
 }

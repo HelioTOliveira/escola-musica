@@ -16,6 +16,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 
 	@Autowired
 	private UsuarioServico usuarioServico;
+	@SuppressWarnings("unused")
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	

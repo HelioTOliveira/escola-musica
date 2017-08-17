@@ -36,6 +36,7 @@ public class Aluno implements Serializable {
 	private String telefone;
 	private Endereco endereco = new Endereco();
 	private byte[] foto;
+	@SuppressWarnings("unused")
 	private StreamedContent imagem;
 	
 	@Id
