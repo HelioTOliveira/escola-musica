@@ -14,6 +14,7 @@ import escola.musica.modelo.Usuario;
 import escola.musica.modelo.UsuarioProfessor;
 import escola.musica.servico.UsuarioProfessorServico;
 import escola.musica.servico.UsuarioServico;
+import escola.musica.util.GeradorSenhaAleatoria;
 
 @Service
 @Transactional
@@ -32,6 +33,10 @@ public class UsuarioProfessorServicoImpl implements UsuarioProfessorServico{
 		Usuario usuarioSalvo = usuarioServico.obterUsuarioPeloLogin(usuarioProfessor.getLogin());
 		if(usuarioSalvo != null && !usuarioSalvo.getId().equals(usuarioProfessor.getId())){
 			throw new LoginRepetidoException("Já existe um usuario cadastrado com este email");
+		}
+		
+		if(usuarioProfessor.getId() == null){
+			String senhaGerada = GeradorSenhaAleatoria.gerarSenhaAleatoria(6);
 		}
 	}
 
