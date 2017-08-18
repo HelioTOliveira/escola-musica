@@ -5,7 +5,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class UsuarioAluno extends Usuario{
 
 	private static final long serialVersionUID = 7805769236030857016L;

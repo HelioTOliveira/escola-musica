@@ -30,5 +30,4 @@ public class UsuarioServicoImpl implements UsuarioServico{
 		}
 		return usuarios.get(0);
 	}
-
 }

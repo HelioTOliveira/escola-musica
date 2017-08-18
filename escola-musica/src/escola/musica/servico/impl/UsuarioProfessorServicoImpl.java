@@ -25,7 +25,7 @@ public class UsuarioProfessorServicoImpl implements UsuarioProfessorServico{
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	@Audited
+	@Autowired
 	private UsuarioServico usuarioServico;
 	
 	@Autowired
@@ -35,7 +35,7 @@ public class UsuarioProfessorServicoImpl implements UsuarioProfessorServico{
 	public void salvar(UsuarioProfessor usuarioProfessor) {
 		// TODO Auto-generated method stub
 		usuarioProfessor.setLogin(usuarioProfessor.getEmail());
-		Usuario usuarioSalvo = usuarioServico.obterUsuarioPeloLogin(usuarioProfessor.getLogin());
+		Usuario usuarioSalvo = usuarioServico.obterUsuarioPeloLogin(usuarioProfessor.getLogin());	
 		if(usuarioSalvo != null && !usuarioSalvo.getId().equals(usuarioProfessor.getId())){
 			throw new LoginRepetidoException("Já existe um usuario cadastrado com este email");
 		}
