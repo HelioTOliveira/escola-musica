@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import escola.musica.excptions.LoginRepetidoException;
 import escola.musica.modelo.Usuario;
 import escola.musica.modelo.UsuarioProfessor;
+import escola.musica.servico.EnvioEmailServico;
 import escola.musica.servico.UsuarioProfessorServico;
 import escola.musica.servico.UsuarioServico;
 import escola.musica.util.GeradorSenhaAleatoria;
@@ -31,6 +32,9 @@ public class UsuarioProfessorServicoImpl implements UsuarioProfessorServico{
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private EnvioEmailServico envioEmailServico;
+	
 	@Override
 	public void salvar(UsuarioProfessor usuarioProfessor) {
 		// TODO Auto-generated method stub
@@ -45,6 +49,7 @@ public class UsuarioProfessorServicoImpl implements UsuarioProfessorServico{
 			System.out.print(senhaGerada);
 			String senhaCriptografada = passwordEncoder.encodePassword(senhaGerada, null);
 			usuarioProfessor.setSenha(senhaCriptografada);
+			envioEmailServico.enviarEmailCadastroUsuarioProfessor(usuarioProfessor, senhaGerada);
 			//TODO - Enviar email com login e senha
 		}
 		entityManager.merge(usuarioProfessor);
