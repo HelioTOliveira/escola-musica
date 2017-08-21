@@ -13,7 +13,7 @@ import escola.musica.modelo.Matricula;
 import escola.musica.servico.MatriculaServico;
 
 @Controller("turmaBean")
-@Scope("session")
+@Scope("view")
 public class TurmaBean implements Serializable {
 
 	/**

@@ -17,7 +17,7 @@ import escola.musica.servico.MatriculaServico;
 import escola.musica.util.Mensagem;
 
 @Controller("matriculaBean")
-@Scope("session")
+@Scope("view")
 public class MatriculaBean implements Serializable {
 
 	/**

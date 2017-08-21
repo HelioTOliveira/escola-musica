@@ -96,6 +96,16 @@
 		<constructor-arg value="256" />
 	</bean>
 	
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+	    <property name="scopes">
+	        <map>
+	            <entry key="view">
+	                <bean class="escola.musica.util.ViewScope"/>
+	            </entry>
+	        </map>
+	    </property>
+	</bean>
+	
 	<!--  Seguração utilizando spring security -->
 	<task:annotation-driven />
 

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.jmx.export.naming.MetadataNamingStrategy;
 import org.springframework.stereotype.Controller;
 
 import escola.musica.excptions.LoginRepetidoException;
@@ -14,7 +13,7 @@ import escola.musica.servico.UsuarioProfessorServico;
 import escola.musica.util.Mensagem;
 
 @Controller
-@Scope("session")
+@Scope("view")
 public class UsuarioProfessorBean implements Serializable {
 
 	private static final long serialVersionUID = -1446484411632089350L;

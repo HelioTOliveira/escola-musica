@@ -17,7 +17,7 @@ import escola.musica.servico.CursoServico;
 import escola.musica.util.Mensagem;
 
 @Controller
-@Scope("session")
+@Scope("view")
 public class CursoBean implements Serializable{
 
 	private static final long serialVersionUID = -862660658464075437L;
