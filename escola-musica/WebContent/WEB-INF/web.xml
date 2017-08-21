@@ -69,7 +69,7 @@
 	<!-- Para mudar o tema do primefaces mudar o layout-->
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>afternoon</param-value>
+		<param-value>bootstrap</param-value>
 	</context-param>
 	
 	<!-- Para exibir o erro na tela bom para o desenvolvimento do projeto -->
@@ -78,4 +78,10 @@
 		<param-value>Development</param-value>
 	</context-param>
 	<!-- Para exibir o erro na tela bom para o desenvolvimento do projeto -->	
+	
+	<!-- Pra usar os icones do primefaces -->
+	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
+	</context-param>
 </web-app>
