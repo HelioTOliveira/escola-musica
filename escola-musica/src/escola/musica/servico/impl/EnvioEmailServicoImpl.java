@@ -13,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -67,6 +68,7 @@ public class EnvioEmailServicoImpl implements EnvioEmailServico{
 	}
 
 	@Override
+	@Async // para executar em segundo plano
 	public void enviarEmailCadastroUsuarioProfessor(UsuarioProfessor usuarioProfessor, String senha) {
 		
 		String assunto ="Cadastro de Usuário";
