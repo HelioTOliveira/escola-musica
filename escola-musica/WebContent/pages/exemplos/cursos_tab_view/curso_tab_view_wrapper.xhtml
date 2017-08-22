@@ -1,0 +1,24 @@
+<ui:composition 
+    template="/pages/layout/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Cursos Tab View</ui:define>
+	
+	<ui:define name="principal">
+		<h:form id="curso_form">
+			<p:tabView>
+				<p:tab title="Cadastro">
+					<ui:include src="/pages/exemplos/cursos_tab_view/cursos.xhtml"></ui:include>
+				 </p:tab>
+				 <p:tab title="Alunos">
+					Alunos do Curso
+				 </p:tab>
+			</p:tabView>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
