@@ -11,9 +11,10 @@ import org.springframework.stereotype.Controller;
 
 import escola.musica.modelo.Matricula;
 import escola.musica.servico.MatriculaServico;
+import escola.musica.util.Mensagem;
 
 @Controller("turmaBean")
-@Scope("view")
+@Scope("session")
 public class TurmaBean implements Serializable {
 
 	/**
@@ -23,6 +24,7 @@ public class TurmaBean implements Serializable {
 
 	private List<Matricula> matriculas;
 	private List<Matricula> matriculasInseridas = new ArrayList<Matricula>();
+	private List<Matricula> matriculasSelecionadas;
 	
 	@Autowired
 	private MatriculaServico matriculaServico;
@@ -35,6 +37,16 @@ public class TurmaBean implements Serializable {
 		Matricula matricula = (Matricula) event.getData();
 		matriculas.remove(matricula);
 		matriculasInseridas.add(matricula);
+	}
+	
+	public void removerMatriculas(){
+		if(matriculasSelecionadas.isEmpty()){
+			Mensagem.mensagemErro("Selecione ao menos uma matrícula para remover");
+			return;
+		}
+		matriculasInseridas.removeAll(matriculasSelecionadas);
+		matriculas.addAll(matriculasSelecionadas);
+		Mensagem.mensagemInformacao("Matriculas removidas com sucesso");
 	}
 	
 	public List<Matricula> getMatriculas() {
@@ -52,6 +64,21 @@ public class TurmaBean implements Serializable {
 	public void setMatriculasInseridas(List<Matricula> matriculasInseridas) {
 		this.matriculasInseridas = matriculasInseridas;
 	}
-	
 
+	public List<Matricula> getMatriculasSelecionadas() {
+		return matriculasSelecionadas;
+	}
+
+	public void setMatriculasSelecionadas(List<Matricula> matriculasSelecionadas) {
+		this.matriculasSelecionadas = matriculasSelecionadas;
+	}
+
+	public MatriculaServico getMatriculaServico() {
+		return matriculaServico;
+	}
+
+	public void setMatriculaServico(MatriculaServico matriculaServico) {
+		this.matriculaServico = matriculaServico;
+	}
+	
 }

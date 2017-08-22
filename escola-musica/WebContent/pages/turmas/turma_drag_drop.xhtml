@@ -7,18 +7,19 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="titulo">Turmas Drag Drop</ui:define>
-	<ui:define name="header">
-		<script type="text/javascript">
-			function handleDrop(event, ui) {
-				var droppedMatricula = ui.draggable;
-				
-				droppedMatricula.fadeOut('fast');
-			}
-		</script>
-	</ui:define>
+	
 	
 	<ui:define name="principal">
+			<script type="text/javascript">
+		function handleDrop(event, ui) {		    
+			var droppedMatricula = ui.draggable;
+			
+			droppedMatricula.fadeOut('fast');
+		}
+	</script>
+	
 		<h:form id="turma_drag_drop_form">
+			<p:growl/>
 			<p:fieldset legend="Alunos Matriculados" style="margin-top:10px;">
 				<p:dataGrid id="alunos-matriculados" value="#{turmaBean.matriculas}" var="matricula" columns="3">
 					<p:panel id="painel-matriculas" header="#{matricula.aluno.nome}">
@@ -44,8 +45,13 @@
 				<p:outputPanel id="drop-area">
 					<h:outputText value="Arraste a matrícula e solte aqui" style="font-size:20px;"
 						rendered="#{empty turmaBean.matriculasInseridas}"/>
+						<p:commandButton value="Remover Matrículas Selecionadas" action="#{turmaBean.removerMatriculas}"
+							update="turma_drag_drop_form" rendered="#{not empty turmaBean.matriculasInseridas}"/>
+							<br/><br/>
 					<p:dataTable value="#{turmaBean.matriculasInseridas}" var="matricula"
-						rendered="#{not empty turmaBean.matriculasInseridas}">
+						rendered="#{not empty turmaBean.matriculasInseridas}" rowKey="#{matricula.id}"
+							selection="#{turmaBean.matriculasSelecionadas}">
+						<p:column selectionMode="multiple" style="width:16px;text-align:center"/>						
 						<p:column headerText="Número">
 							<h:outputText value="#{matricula.numero}"/>
 						</p:column>
@@ -61,7 +67,7 @@
 			
 			<p:droppable for="turma" datasource="alunos-matriculados" onDrop="handleDrop" 
 				tolerance="touch" activeStyleClass="ui-state-highlight"> 
-				<p:ajax listener="#{turmaBean.onMatriculaDrop}" update="drop-area alunos-matriculados"></p:ajax>
+				<p:ajax listener="#{turmaBean.onMatriculaDrop}" update="drop-area alunos-matriculados"/>
 			</p:droppable>					  
 		</h:form>
 	</ui:define>
