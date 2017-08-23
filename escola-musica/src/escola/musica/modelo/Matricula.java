@@ -21,6 +21,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @NamedQueries({
 	
 	@NamedQuery(name = Matricula.LISTAR_TODAS, query= Matricula.LISTAR_TODAS),
+	@NamedQuery(name = Matricula.LISTAR_TODAS_POR_CURSO, query= Matricula.LISTAR_TODAS_POR_CURSO),
 	@NamedQuery(name ="Matricula.ListarTodasAtivas", query= "from Matricula where ativo = true")
 })
 
@@ -45,6 +46,9 @@ public class Matricula implements Serializable {
 	//Ou cria uma classe com o contrutor abaixo
 	public static final String LISTAR_TODAS = "select new escola.musica.modelo.MatriculaVO (id, numero, "
 			+ "dataMatricula, aluno.nome, curso.nome) from Matricula";
+	
+	public static final String LISTAR_TODAS_POR_CURSO = "select new escola.musica.modelo.MatriculaVO (id, numero, "
+			+ "dataMatricula, aluno.nome, curso.nome) from Matricula where curso.id = :idCurso";
 	
 	public Matricula(){}
 	

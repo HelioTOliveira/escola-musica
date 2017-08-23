@@ -8,7 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	
-	<p:panel header="Cadastro de Cursos" style="width:60%;">
+	<p:panel header="Cadastro de Cursos" style="width:90%;">
 		<p:panelGrid columns="2" style="width:95%;">
 			<h:outputLabel value="Nome:"/>
 			<p:inputText value="#{cursoTabViewBean.curso.nome}">							
@@ -34,5 +34,65 @@
 			update="@form" id="btn-salvar"/>
 		<p:commandButton icon="fa fa-arrow-left" value="Voltar" action="#{cursoTabViewBean.voltar}" update="@form" 
 			immediate="true"/>
+		<br/>
+		<hr/>
+		<br/>
+		
+		<p:dataTable value="#{cursoTabViewBean.cursos}" var="curso" paginator="true" rows="10" filteredValue="#{cursoTabViewBeancursosFiltrados}"
+				rowsPerPageTemplate="5,10,15" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+					{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" id="tabela-cursos">
+					
+				<p:column headerText="Nome" style="width:300px;" sortBy="#{curso.nome}" filterBy="#{curso.nome}" 
+						filterMatchMode="contains">
+					<h:outputText value="#{curso.nome}"/>
+				</p:column>
+				
+				<p:column headerText="Duração" style="width:80px;" sortBy="#{curso.duracao}">
+					<h:outputText value="#{curso.duracao}" />
+				</p:column>
+				
+					<p:column headerText="Tipo" filterBy="#{curso.tipo.label}" filterMatchMode="contains">
+					<h:outputText value="#{curso.tipo.label}"/>
+				</p:column>
+				
+				<p:column headerText="Data Criação" sortBy="#{curso.dataCriacao}">
+					<h:outputText value="#{curso.dataCriacao}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>						
+				</p:column>
+				
+				<p:column style="text-align:center;" exportable="false">
+					
+					<p:commandButton icon="fa fa-edit" action="#{cursoTabViewBean.editar(curso)}"
+						style ="color:blue" update=":curso_form" process="@this"/>
+						
+					<p:commandButton icon="fa fa-trash" 
+							actionListener="#{cursoTabViewBean.prepararExclusao(curso)}"
+							oncomplete="PF('confirmarExclusaoDialog').show();"
+							style ="color:red; margin-left:20px" update="@form"/>
+							
+				</p:column>
+				
+			</p:dataTable>
+			<br/>
+						<!--Esportar dados da lista -->
+			<h:commandLink>
+				<p:graphicImage value="/resources/imagens/exportar_xls.png"/>
+				<p:dataExporter type="xls" target="tabela-cursos" fileName="cursos"/>
+			</h:commandLink>
+			
+			<h:commandLink style="margin-left:10px;">
+				<p:graphicImage library="imagens" name="exportar_pdf.png"/>					
+				<p:dataExporter type="pdf" target="tabela-cursos" fileName="cursos"
+					encoding="iso-8859-1"/>
+			</h:commandLink>
+			
+			<p:confirmDialog message="Deseja realmente excluir o curso #{cursoTabViewBean.cursoExclusao.nome}" 
+				widgetVar="confirmarExclusaoDialog">
+				<p:commandButton value="Sim" action="#{cursoTabViewBean.excluir()}"
+					oncomplete="PF('confirmarExclusaoDialog').hide();" update="@form"/>
+				<p:commandButton value="Não" oncomplete="PF('confirmarExclusaoDialog').hide();"/>
+			</p:confirmDialog>
+			
 	</p:panel>	
 </html>

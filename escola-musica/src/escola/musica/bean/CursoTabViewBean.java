@@ -11,9 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import escola.musica.modelo.Aluno;
 import escola.musica.modelo.Curso;
+import escola.musica.modelo.Matricula;
 import escola.musica.modelo.TipoCurso;
+import escola.musica.servico.AlunoServico;
 import escola.musica.servico.CursoServico;
+import escola.musica.servico.MatriculaServico;
 import escola.musica.util.Mensagem;
 
 @Controller("cursoTabViewBean")
@@ -29,11 +33,14 @@ public class CursoTabViewBean implements Serializable{
 	private List<Curso> cursosAccordion = new ArrayList<Curso>();
 	private Curso cursoExclusao;
 	private List<Curso> cursosFiltrados;
+	private List<Matricula> alunos = new ArrayList<Matricula>();
 	
 	//Com anotação o proprio spring faz a intancia do objeto
 	@Autowired
 	private CursoServico cursoServico;
-
+	@Autowired
+	private MatriculaServico matriculaSerrvico;
+	
 //	public CursoBean(){
 //		cursos = new CursoDAO().listarTodos();
 //		cursosAccordion = CursoDAO.listarCursosAccordion();
@@ -67,7 +74,7 @@ public class CursoTabViewBean implements Serializable{
 		//new CursoDAO().salvar(curso);
 		cursos = cursoServico.listarTodos();
 		//cursos = new CursoDAO().listarTodos();
-		curso = null;
+		curso = new Curso();
 		
 		Mensagem.mensagemInformacao("Curso salvo com sucesso!");		
 	}
@@ -75,7 +82,7 @@ public class CursoTabViewBean implements Serializable{
 	public void editar(Curso curso){
 		
 		this.curso = curso;
-		
+		this.alunos = matriculaSerrvico.listarPorCurso(curso.getId());
  	}
 	
 	public void prepararExclusao(Curso curso){
