@@ -10,13 +10,20 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = Horario.LISTAR_POR_TURMA, query = Horario.LISTAR_POR_TURMA)
+})
 public class Horario implements Serializable {
 
 	private static final long serialVersionUID = 7452940887634219926L;
+
+	public static final String LISTAR_POR_TURMA = "select horarios from Turma where id = :idTurma";
 
 	private Integer id;
 	private DiaSemana diaSemana;

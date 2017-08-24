@@ -13,9 +13,9 @@ import escola.musica.modelo.Matricula;
 import escola.musica.servico.MatriculaServico;
 import escola.musica.util.Mensagem;
 
-@Controller("turmaBean")
+@Controller("turmaDragDropBean")
 @Scope("session")
-public class TurmaBean implements Serializable {
+public class TurmaDragDropBean implements Serializable {
 
 	/**
 	 * 
