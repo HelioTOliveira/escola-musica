@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
+import org.primefaces.event.TabChangeEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import escola.musica.modelo.Aluno;
 import escola.musica.modelo.Curso;
 import escola.musica.modelo.Matricula;
 import escola.musica.modelo.TipoCurso;
-import escola.musica.servico.AlunoServico;
 import escola.musica.servico.CursoServico;
 import escola.musica.servico.MatriculaServico;
 import escola.musica.util.Mensagem;
@@ -33,7 +33,7 @@ public class CursoTabViewBean implements Serializable{
 	private List<Curso> cursosAccordion = new ArrayList<Curso>();
 	private Curso cursoExclusao;
 	private List<Curso> cursosFiltrados;
-	private List<Matricula> alunos = new ArrayList<Matricula>();
+	private List<Matricula> matriculas = new ArrayList<Matricula>();
 	
 	//Com anotação o proprio spring faz a intancia do objeto
 	@Autowired
@@ -82,7 +82,7 @@ public class CursoTabViewBean implements Serializable{
 	public void editar(Curso curso){
 		
 		this.curso = curso;
-		this.alunos = matriculaSerrvico.listarPorCurso(curso.getId());
+		//matriculas = matriculaSerrvico.listarPorCurso(curso.getId());
  	}
 	
 	public void prepararExclusao(Curso curso){
@@ -96,6 +96,15 @@ public class CursoTabViewBean implements Serializable{
 		Mensagem.mensagemInformacao("Curso excluído com Sucesso");
 		cursos = cursoServico.listarTodos();
 		cursosFiltrados = null;
+	}
+	
+	public void onTabChange(TabChangeEvent event){
+		String tituloAba = event.getTab().getTitle();
+		if(Objects.equals(tituloAba, "Matriculas")){									  
+			  matriculas = matriculaSerrvico.listarPorCurso(curso.getId());
+		}else{
+			matriculas = null;
+		}
 	}
 	
 	public void voltar(){
@@ -147,5 +156,13 @@ public class CursoTabViewBean implements Serializable{
 		this.cursoExclusao = cursoExclusao;
 	}
 
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+	
 	
 }

@@ -11,11 +11,12 @@
 	<ui:define name="principal">
 		<h:form id="curso_form">
 			<p:tabView>
+			 	<p:ajax event="tabChange" listener="#{cursoTabViewBean.onTabChange}" update="@form" process="@this"/>
 				<p:tab title="Cadastro">
 					<ui:include src="/pages/exemplos/cursos_tab_view/cursos.xhtml"></ui:include>
 				 </p:tab>
-				 <p:tab title="Alunos">
-					Alunos do Curso
+				 <p:tab title="Matriculas">				 
+					<ui:include src="/pages/exemplos/cursos_tab_view/matriculas.xhtml"></ui:include>
 				 </p:tab>
 			</p:tabView>
 		</h:form>

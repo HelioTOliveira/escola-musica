@@ -47,8 +47,7 @@ public class Matricula implements Serializable {
 	public static final String LISTAR_TODAS = "select new escola.musica.modelo.MatriculaVO (id, numero, "
 			+ "dataMatricula, aluno.nome, curso.nome) from Matricula";
 	
-	public static final String LISTAR_TODAS_POR_CURSO = "select new escola.musica.modelo.MatriculaVO (id, numero, "
-			+ "dataMatricula, aluno.nome, curso.nome) from Matricula where curso.id = :idCurso";
+	public static final String LISTAR_TODAS_POR_CURSO = "from Matricula where curso.id = :idCurso";
 	
 	public Matricula(){}
 	
