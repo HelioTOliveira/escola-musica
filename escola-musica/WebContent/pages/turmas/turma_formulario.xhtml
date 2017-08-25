@@ -26,16 +26,20 @@
 				<f:selectItems value="#{turmaBean.semestres}" var="semestre" itemLabel="#{semestre.label}"
 					itemValue="#{semestre}"/>
 			</p:selectOneMenu>
+				<h:outputLabel value="Ativo: "/>
+			<p:selectBooleanCheckbox value="#{turmaBean.turma.ativo}"/>		
+			
 			<h:outputLabel value="Matrículas: "/>
 			<p:selectCheckboxMenu label="Matrículas" value="#{turmaBean.turma.matriculas}" 
 				converter="matriculaConverter" style="width:250px;" panelStyle="width:350px;"
 				filter="true" filterMatchMode="contains">
 				<f:selectItems value="#{turmaBean.matriculas}" var="matricula" 
 					itemLabel="#{matricula.aluno.nome} - #{matricula.curso.nome}"/>
+				<p:ajax update="label-matriculas"/>
 			</p:selectCheckboxMenu>
-			
-			<h:outputLabel value="Ativo: "/>
-			<p:selectBooleanCheckbox value="#{turmaBean.turma.ativo}"/>		
+			<h:outputLabel value=""/>
+			<h:outputText id="label-matriculas" value="#{turmaBean.labelMatriculas}" escape="false"/>
+		
 		</h:panelGrid>
 		
 		<p:commandButton value="Salvar" icon="salvar-icon" action="#{turmaBean.salvarTurma}"

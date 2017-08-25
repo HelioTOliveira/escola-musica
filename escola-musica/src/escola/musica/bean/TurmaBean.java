@@ -68,6 +68,19 @@ public class TurmaBean implements Serializable {
 		turmas = turmaServico.listarTodas();
 	}
 	
+	public String getLabelMatriculas(){
+		StringBuilder label = new StringBuilder("");
+		if(turma.getMatriculas().isEmpty()){
+			return label.toString();
+		}
+		
+		for(Matricula matricula: turma.getMatriculas()){
+			label.append(matricula.getAluno().getNome() + " - " + matricula.getCurso().getNome() 
+					+ "<br/>");
+		}
+		return label.toString();
+	}
+	
 	public Turma getTurma() {
 		return turma;
 	}

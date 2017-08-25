@@ -1,6 +1,7 @@
 package escola.musica.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class Turma implements Serializable {
 	private Curso curso;
 	private boolean ativo;
 	private Semestre semestre;
-	private List<Matricula> matriculas;
+	private List<Matricula> matriculas = new ArrayList<Matricula>();
 	private List<Horario> horarios;
 
 	@Id
