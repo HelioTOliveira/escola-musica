@@ -8,9 +8,9 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<p:panel header="Cadastro de Turmas" rendered="#{turmaBean.turma != null}">
-		<h:panelGrid columns="2">
+		<h:panelGrid columns="2" cellpadding="5">
 			<h:outputLabel value="Nome: "/>
-			<p:inputText value="#{turmaBean.turma.nome}"/>
+			<p:inputText value="#{turmaBean.turma.nome}" size="30"/>
 			<h:outputLabel value="Sigla: "/>
 			<p:inputText value="#{turmaBean.turma.sigla}"/>
 			<h:outputLabel value="Curso: "/>
@@ -26,11 +26,21 @@
 				<f:selectItems value="#{turmaBean.semestres}" var="semestre" itemLabel="#{semestre.label}"
 					itemValue="#{semestre}"/>
 			</p:selectOneMenu>
-			
+			<h:outputLabel value="Matrículas: "/>
+			<p:selectCheckboxMenu label="Matrículas" value="#{turmaBean.turma.matriculas}" 
+				converter="matriculaConverter" style="width:250px;" panelStyle="width:350px;"
+				filter="true" filterMatchMode="contains">
+				<f:selectItems value="#{turmaBean.matriculas}" var="matricula" 
+					itemLabel="#{matricula.aluno.nome} - #{matricula.curso.nome}"/>
+			</p:selectCheckboxMenu>
 			
 			<h:outputLabel value="Ativo: "/>
 			<p:selectBooleanCheckbox value="#{turmaBean.turma.ativo}"/>		
 		</h:panelGrid>
 		
+		<p:commandButton value="Salvar" icon="salvar-icon" action="#{turmaBean.salvarTurma}"
+			update="@form"/>
+		<p:commandButton value="Cancelar" icon="fa fa-remove" action="#{turmaBean.cancelarTurma}"
+		update="@form" immediate="true"/>
 	</p:panel>
 </html>
