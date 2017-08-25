@@ -1,14 +1,13 @@
 package escola.musica.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import escola.musica.modelo.Curso;
 import escola.musica.modelo.Matricula;
@@ -29,7 +28,7 @@ public class TurmaBean implements Serializable {
 	private List<Turma> turmas;
 	private List<Semestre> semestres;
 	private List<Curso> cursos;
-	private List<Matricula> matriculas;
+	private List<Matricula> matriculas = new ArrayList<Matricula>();
 
 	@Autowired
 	private TurmaServico turmaServico;
@@ -58,6 +57,7 @@ public class TurmaBean implements Serializable {
 	
 	public void editarTurma(Turma turma){
 		this.turma = turma;
+		this.turma.setMatriculas(new ArrayList<Matricula>(this.turma.getMatriculas()));
 	}
 	
 	public void cancelarTurma(){

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -82,7 +83,7 @@ public class Turma implements Serializable {
 		this.semestre = semestre;
 	}
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "turma_matricula",
 			joinColumns = {@JoinColumn(name = "id_turma")},
 			inverseJoinColumns = {@JoinColumn(name = "id_matricula")})
