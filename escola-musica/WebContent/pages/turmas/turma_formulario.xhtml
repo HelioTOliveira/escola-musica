@@ -8,7 +8,29 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<p:panel header="Cadastro de Turmas" rendered="#{turmaBean.turma != null}">
-		
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome: "/>
+			<p:inputText value="#{turmaBean.turma.nome}"/>
+			<h:outputLabel value="Sigla: "/>
+			<p:inputText value="#{turmaBean.turma.sigla}"/>
+			<h:outputLabel value="Curso: "/>
+			<p:selectOneMenu value="#{turmaBean.turma.curso}" converter="cursoConverter" filter="true"
+				filterMatchMode="contains">
+				<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
+				<f:selectItems value="#{turmaBean.cursos}" var="curso" itemLabel="#{curso.nome}"
+					itemValue="#{curso}"/>
+			</p:selectOneMenu>
+			<h:outputLabel value="Semestre: "/>
+			<p:selectOneMenu value="#{turmaBean.turma.semestre}">
+				<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
+				<f:selectItems value="#{turmaBean.semestres}" var="semestre" itemLabel="#{semestre.label}"
+					itemValue="#{semestre}"/>
+			</p:selectOneMenu>
+			
+			
+			<h:outputLabel value="Ativo: "/>
+			<p:selectBooleanCheckbox value="#{turmaBean.turma.ativo}"/>		
+		</h:panelGrid>
 		
 	</p:panel>
 </html>

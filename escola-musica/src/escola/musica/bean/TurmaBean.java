@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
@@ -19,6 +20,7 @@ import escola.musica.servico.TurmaServico;
 import escola.musica.util.Mensagem;
 
 @Controller("turmaBean")
+@Scope("view")
 public class TurmaBean implements Serializable {
 
 	private static final long serialVersionUID = 374615860770008608L;
