@@ -16,6 +16,7 @@ import escola.musica.modelo.Matricula;
 import escola.musica.modelo.Semestre;
 import escola.musica.modelo.Turma;
 import escola.musica.servico.CursoServico;
+import escola.musica.servico.HorarioServico;
 import escola.musica.servico.MatriculaServico;
 import escola.musica.servico.TurmaServico;
 import escola.musica.util.Mensagem;
@@ -39,6 +40,8 @@ public class TurmaBean implements Serializable {
 	private CursoServico cursoServico;
 	@Autowired
 	private MatriculaServico matriculaServico;
+	@Autowired
+	private HorarioServico horarioServico;
 	
 	public void iniciarBean(){
 		semestres =  Arrays.asList(Semestre.values());
@@ -95,6 +98,22 @@ public class TurmaBean implements Serializable {
 	
 	public List<DiaSemana> getDiasSemana(){
 		return Arrays.asList(DiaSemana.values());
+	}
+	
+	public void salvarHorario(){
+		//horarioServico.salvar(horario);
+		if(turma.getHorarios().contains(horario)){
+			turma.getHorarios().remove(horario);
+			turma.getHorarios().add(horario);
+		}
+		
+		turma.getHorarios().add(horario);
+		horario = new Horario();
+		Mensagem.mensagemInformacao("Horário adicionado com sucesso");
+	}
+	
+	public void editarHorario(Horario horario){
+		this.horario = horario;
 	}
 	
 	public Turma getTurma() {
