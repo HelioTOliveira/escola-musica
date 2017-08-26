@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import escola.musica.modelo.Curso;
+import escola.musica.modelo.DiaSemana;
+import escola.musica.modelo.Horario;
 import escola.musica.modelo.Matricula;
 import escola.musica.modelo.Semestre;
 import escola.musica.modelo.Turma;
@@ -29,7 +31,8 @@ public class TurmaBean implements Serializable {
 	private List<Semestre> semestres;
 	private List<Curso> cursos;
 	private List<Matricula> matriculas = new ArrayList<Matricula>();
-
+	private Horario horario = new Horario();
+	
 	@Autowired
 	private TurmaServico turmaServico;
 	@Autowired
@@ -81,6 +84,19 @@ public class TurmaBean implements Serializable {
 		return label.toString();
 	}
 	
+	//Horários
+	public void novoHorario(){
+		this.horario = new Horario();
+	}
+	
+	public void limparHorario(){
+		this.horario = new Horario();
+	}
+	
+	public List<DiaSemana> getDiasSemana(){
+		return Arrays.asList(DiaSemana.values());
+	}
+	
 	public Turma getTurma() {
 		return turma;
 	}
@@ -121,4 +137,13 @@ public class TurmaBean implements Serializable {
 		this.matriculas = matriculas;
 	}
 
+	public Horario getHorario() {
+		return horario;
+	}
+
+	public void setHorario(Horario horario) {
+		this.horario = horario;
+	}
+
+	
 }
