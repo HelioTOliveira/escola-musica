@@ -19,8 +19,8 @@ public class HorarioServicoimpl implements HorarioServico{
 	private EntityManager entityMnager;
 	
 	@Override
-	public void salvar(Horario horario) {
-		entityMnager.merge(horario);
+	public Horario salvar(Horario horario) {
+		return entityMnager.merge(horario);
 		
 	}
 

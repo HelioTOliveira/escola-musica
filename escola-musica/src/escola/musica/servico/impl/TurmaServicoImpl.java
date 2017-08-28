@@ -16,18 +16,18 @@ import escola.musica.servico.TurmaServico;
 public class TurmaServicoImpl implements TurmaServico {
 
 	@PersistenceContext
-	private EntityManager entityMnager;
+	private EntityManager entityManager;
 	
 	@Override
 	public void salvar(Turma turma) {
-		entityMnager.merge(turma);
+		entityManager.merge(turma);
 
 	}
 
 	@Override
 	public List<Turma> listarTodas() {
 		// TODO Mostrar Hibernate.initialize()
-		return entityMnager.createQuery("from Turma", Turma.class).getResultList();
+		return entityManager.createQuery("from Turma", Turma.class).getResultList();		
 	}
 
 }

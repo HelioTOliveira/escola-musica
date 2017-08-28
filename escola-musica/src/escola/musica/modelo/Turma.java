@@ -97,7 +97,7 @@ public class Turma implements Serializable {
 		this.matriculas = matriculas;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name = "id_turma")
 	public List<Horario> getHorarios() {
 		return horarios;

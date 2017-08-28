@@ -64,6 +64,10 @@
 			<p:column>
 				<p:commandButton icon="editar-icon" action="turmaBean.editarHorario(horario)" update="@form"
 					oncomplete="PF('adicionarHorarioDialog').show()"/>
+			</p:column>	
+			<p:commandButton icon="excluir-icon" update="@form" oncomplete="PF('confirmarExclusaoHorarioDialog').show()">
+				<f:setPropertyActionListener value="#{horario}" target="#{turmaBean.horario}"/>
+			</p:commandButton>
 			</p:column>			
 		</p:dataTable>	
 	</p:panel>
@@ -91,4 +95,13 @@
 		<p:commandButton value="Cancelar" icon="cancelar-icon" action="#{turmaBean.limparHorario}"
 			oncomplete="PF('adicionarHorarioDialog').hide" update="@form" immediate="true"/>
 	</p:dialog>
+	
+	<p:confirmDialog message="Deseja realmente excluir este horário?" header="Exclusão de Horário"
+		widgetVar="confirmaExclusaoHorarioDialog">
+		<p:commandButton value="Sim" action="turmaBean.excluirHorario()}" update="@form"
+			oncomplete="PF('confirmaExclusaoHorarioDialog').hide()"/>
+			<p:commandButton value="Não" update="@form"	oncomplete="PF('confirmaExclusaoHorarioDialog').hide()">
+				<f:setPropertyActionListener value="#{null}" target="#{turmaBean.horario}"/>
+			</p:commandButton>
+	</p:confirmDialog>
 </html>

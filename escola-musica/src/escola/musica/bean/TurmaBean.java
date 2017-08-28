@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.sun.mail.handlers.message_rfc822;
+
 import escola.musica.modelo.Curso;
 import escola.musica.modelo.DiaSemana;
 import escola.musica.modelo.Horario;
@@ -101,19 +103,23 @@ public class TurmaBean implements Serializable {
 	}
 	
 	public void salvarHorario(){
-		//horarioServico.salvar(horario);
-		if(turma.getHorarios().contains(horario)){
-			turma.getHorarios().remove(horario);
+		horario = horarioServico.salvar(horario);
+		if(!turma.getHorarios().contains(horario)){
+			//turma.getHorarios().remove(horario);
 			turma.getHorarios().add(horario);
-		}
-		
-		turma.getHorarios().add(horario);
+		}		
 		horario = new Horario();
 		Mensagem.mensagemInformacao("Horário adicionado com sucesso");
 	}
 	
 	public void editarHorario(Horario horario){
 		this.horario = horario;
+	}
+	
+	public void excluirHorario(){
+		turma.getHorarios().remove(horario);
+		horario = new Horario();
+		Mensagem.mensagemInformacao("Horário removido com sucesso");
 	}
 	
 	public Turma getTurma() {
