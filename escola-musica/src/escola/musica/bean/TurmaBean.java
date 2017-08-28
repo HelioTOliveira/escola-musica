@@ -35,6 +35,7 @@ public class TurmaBean implements Serializable {
 	private List<Curso> cursos;
 	private List<Matricula> matriculas = new ArrayList<Matricula>();
 	private Horario horario = new Horario();
+	private int indiceHorario;
 	
 	@Autowired
 	private TurmaServico turmaServico;
@@ -120,6 +121,19 @@ public class TurmaBean implements Serializable {
 		turma.getHorarios().remove(horario);
 		horario = new Horario();
 		Mensagem.mensagemInformacao("Horário removido com sucesso");
+	}
+	
+	//Horário nova implementação
+	public void incluirHorario(){
+		turma.getHorarios().add(new Horario());
+	}
+	
+	public void prepararRemocaoHorario(int indiceHorario){
+		this.indiceHorario = indiceHorario;
+	}
+	
+	public void removerHorario(){
+		turma.getHorarios().remove(indiceHorario);
 	}
 	
 	public Turma getTurma() {

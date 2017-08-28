@@ -50,26 +50,51 @@
 		<p:commandButton value="Adicionar Horário" icon="adicionar-icon" action="#{turmaBean.novoHorario}"
 			oncomplete="PF('adicionarHorarioDialog').show()" update="@form"/>
 			<br/><br/>
-		<h:outputText value="Horário da Turma"/>
-		<p:dataTable value="#{turmaBean.turma.horarios}" var="horario">
-			<p:column headerText="Dia da Semana">
-				<h:outputText value="#{horario.diaSemana.label}"/>
-			</p:column>
-			<p:column headerText="Hora Início">
-				<h:outputText value="#{horario.horaInicio}"/>
-			</p:column>
-			<p:column headerText="Hora Término">
-				<h:outputText value="#{horario.horaFim}"/>
-			</p:column>
-			<p:column>
-				<p:commandButton icon="editar-icon" action="turmaBean.editarHorario(horario)" update="@form"
-					oncomplete="PF('adicionarHorarioDialog').show()"/>
-			</p:column>	
-			<p:commandButton icon="excluir-icon" update="@form" oncomplete="PF('confirmarExclusaoHorarioDialog').show()">
-				<f:setPropertyActionListener value="#{horario}" target="#{turmaBean.horario}"/>
-			</p:commandButton>
-			</p:column>			
-		</p:dataTable>	
+			
+			<p:commandButton value="Incluir Horário" action="#{turmaBean.incluirHorario}" update="@form"/>
+			<h:outputText value="Horários"/>
+			<p:dataTable value="#{turmaBean.turma.horarios}" var="horario" editable="true" rowIndexVar="indice">
+				<p:column headerText="Dia da Semana">
+					<p:selectOneMenu value="#{horario.diaSemana}">
+						<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
+						<f:selectItems value="#{turmaBean.diasSemana}" var="diaSemana"
+							itemLabel="#{diaSemana.label}" itemValue="#{diaSemana}"/>
+					</p:selectOneMenu>
+				</p:column>
+				<p:column headerText="Hora Início">
+					<p:calendar value="#{horario.horaInicio}" timeOnly="true" pattern="HH:mm" 
+						stepMinute="5" minHour="8" maxHour="22" size="5" mask="99:99" showOn="button"
+						label="Selecione o Horário"/>
+				</p:column>
+				<p:column headerText="Hora Término">
+					<p:calendar value="#{horario.horaFim}" timeOnly="true" pattern="HH:mm" 
+					stepMinute="5" minHour="8" maxHour="22" size="5" mask="99:99" showOn="button"
+					label="Selecione o Horário"/>
+				</p:column>				
+				<p:commandButton icon="excluir-icon" update="@form" oncomplete="PF('confirmarExclusaoHorarioDialog').show()"
+					action="#{turmabean.prepararRemocaoHorario(indice)}"/>				
+		    </p:dataTable>	
+		<ui:remove>
+			<h:outputText value="Horário da Turma"/>
+			<p:dataTable value="#{turmaBean.turma.horarios}" var="horario">
+				<p:column headerText="Dia da Semana">
+					<h:outputText value="#{horario.diaSemana.label}"/>
+				</p:column>
+				<p:column headerText="Hora Início">
+					<h:outputText value="#{horario.horaInicio}"/>
+				</p:column>
+				<p:column headerText="Hora Término">
+					<h:outputText value="#{horario.horaFim}"/>
+				</p:column>
+				<p:column>
+					<p:commandButton icon="editar-icon" action="turmaBean.editarHorario(horario)" update="@form"
+						oncomplete="PF('adicionarHorarioDialog').show()"/>
+				</p:column>	
+				<p:commandButton icon="excluir-icon" update="@form" oncomplete="PF('confirmarExclusaoHorarioDialog').show()">
+					<f:setPropertyActionListener value="#{horario}" target="#{turmaBean.horario}"/>
+				</p:commandButton>				
+			</p:dataTable>	
+		</ui:remove>
 	</p:panel>
 	
 	<p:dialog  widgetVar="adicionarHorarioDialog" modal="true" header="Cadastro de Horários">
