@@ -16,7 +16,7 @@
 			<p:panelGrid columns="2">
 				<h:outputText value="Aluno: "/>
 				<p:selectOneMenu value="#{matriculaBean.parametros.aluno}" converter="alunoConverter"
-					 style="weidth:250px;">
+					 style="weidth:250px;" filter="true" filterMatchMode="contains">
 					<f:selectItem itemLabel=":: Selecione ::" itemValue="#{null}"/>
 					<f:selectItems value="#{matriculaBean.alunos}" var="aluno" itemLabel="#{aluno.nome}" 
 					itemValue="#{aluno}"/>
@@ -37,11 +37,11 @@
 				</h:panelGroup>
 			</p:panelGrid>
 			<br/>
-			<p:commandButton value="Pesquisar" icon="fa fa-search" action="matriculaBean.pesquisar"
-				update="@form"/>
+			<p:commandButton value="Pesquisar" icon="fa fa-search" action="#{matriculaBean.pesquisar}"
+				update="tabela-matriculas"/>
 			
 			<p:dataTable value="#{matriculaBean.matriculasVos}" var="matricula" style="margin-top:10px; width:60%"
-				emptyMessage="Nenhuma matrícula cadastrada">
+				emptyMessage="Nenhuma matrícula cadastrada" id="tabela-matriculas">
 				<p:column headerText="Número" width="100" filterBy="#{matricula.numero}" filterMatchMode="contains">
 					<h:outputText value="#{matricula.numero}"/>
 				</p:column>

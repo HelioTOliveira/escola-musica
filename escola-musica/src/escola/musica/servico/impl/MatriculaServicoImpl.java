@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,9 +55,21 @@ public class MatriculaServicoImpl implements escola.musica.servico.MatriculaServ
 	}
 
 	@Override
-	public void pesquisar(ParametrosBuscaMatriculas parametros) {
-		// TODO Auto-generated method stub
+	public List<MatriculaVO> pesquisar(ParametrosBuscaMatriculas parametros) {
+		StringBuilder builder = new StringBuilder("select new escola.musica.modelo.MatriculaVO("
+				+ "m.id, m.numero, m.dataMatricula, m.aluno.nome, m.curso.nome) from  Matricula m where m.id is not null ");
 		
+		if(parametros.getAluno() != null){
+			builder.append(" and m.aluno = :aluno");
+		}
+		
+		Query query = entityManager.createQuery(builder.toString());
+		
+		if(parametros.getAluno() != null){
+			query.setParameter("aluno", parametros.getAluno());
+		}
+		
+		return query.getResultList();
 	}
 
 }

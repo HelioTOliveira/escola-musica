@@ -47,7 +47,7 @@ public class MatriculaBean implements Serializable {
 	}
 	
 	public void pesquisar(){
-		matriculaServico.pesquisar(parametros);
+		matriculasVos = matriculaServico.pesquisar(parametros);
 	}
 
 	public void salvar() {
