@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import escola.musica.modelo.Aluno;
 import escola.musica.modelo.Matricula;
 import escola.musica.modelo.MatriculaVO;
+import escola.musica.modelo.ParametrosBuscaMatriculas;
 
 @Service(value = "MatriculaServico")
 @Transactional
@@ -49,6 +50,12 @@ public class MatriculaServicoImpl implements escola.musica.servico.MatriculaServ
 	public List<Matricula> listarPorCurso(Integer id) {
 		return entityManager.createNamedQuery(Matricula.LISTAR_TODAS_POR_CURSO, Matricula.class).setParameter("idCurso", id)
 				.getResultList();
+		
+	}
+
+	@Override
+	public void pesquisar(ParametrosBuscaMatriculas parametros) {
+		// TODO Auto-generated method stub
 		
 	}
 

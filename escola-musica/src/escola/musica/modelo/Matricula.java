@@ -39,6 +39,7 @@ public class Matricula implements Serializable {
 	private Curso curso;
 	private boolean ativo = true;
 	private Date dataDesativacao;
+	
 
 	//Atraves do contrutor da propria classe
 //	public static final String LISTAR_TODAS = "select new Matricula (id, dataMatricula, numero, aluno.nome, curso.nome)"

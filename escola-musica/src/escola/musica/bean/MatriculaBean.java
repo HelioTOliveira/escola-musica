@@ -11,6 +11,7 @@ import escola.musica.modelo.Aluno;
 import escola.musica.modelo.Curso;
 import escola.musica.modelo.Matricula;
 import escola.musica.modelo.MatriculaVO;
+import escola.musica.modelo.ParametrosBuscaMatriculas;
 import escola.musica.servico.AlunoServico;
 import escola.musica.servico.CursoServico;
 import escola.musica.servico.MatriculaServico;
@@ -30,6 +31,7 @@ public class MatriculaBean implements Serializable {
 	private List<MatriculaVO> matriculasVos;
 	private List<Aluno> alunos;
 	private List<Curso> cursos;
+	private ParametrosBuscaMatriculas parametros = new ParametrosBuscaMatriculas();
 
 	@Autowired
 	private MatriculaServico matriculaServico;
@@ -42,6 +44,10 @@ public class MatriculaBean implements Serializable {
 		atualizarMatriculas();
 		alunos = alunoServico.listarTodos();
 		cursos = cursoServico.listarTodos();
+	}
+	
+	public void pesquisar(){
+		matriculaServico.pesquisar(parametros);
 	}
 
 	public void salvar() {
@@ -71,9 +77,9 @@ public class MatriculaBean implements Serializable {
 	}
 
 	private void atualizarMatriculas() {
-		//usando o contrutor da classe matricula
-		//matriculas = matriculaServico.listarTodas();
-		//usado o construtor da classe criada
+		// usando o contrutor da classe matricula
+		// matriculas = matriculaServico.listarTodas();
+		// usado o construtor da classe criada
 		matriculasVos = matriculaServico.listarTodas();
 	}
 
@@ -115,6 +121,14 @@ public class MatriculaBean implements Serializable {
 
 	public void setMatriculasVos(List<MatriculaVO> matriculasVos) {
 		this.matriculasVos = matriculasVos;
+	}
+
+	public ParametrosBuscaMatriculas getParametros() {
+		return parametros;
+	}
+
+	public void setParametros(ParametrosBuscaMatriculas parametros) {
+		this.parametros = parametros;
 	}
 
 }

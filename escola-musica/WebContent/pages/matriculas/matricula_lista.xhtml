@@ -11,9 +11,38 @@
 		<p:commandButton value="Nova Matrícula" action="#{matriculaBean.novaMatricula}"
 			update="matricula_form" icon="adicionar-icon"/>
 			
+			<br/>
+			<br/>
+			<p:panelGrid columns="2">
+				<h:outputText value="Aluno: "/>
+				<p:selectOneMenu value="#{matriculaBean.parametros.aluno}" converter="alunoConverter"
+					 style="weidth:250px;">
+					<f:selectItem itemLabel=":: Selecione ::" itemValue="#{null}"/>
+					<f:selectItems value="#{matriculaBean.alunos}" var="aluno" itemLabel="#{aluno.nome}" 
+					itemValue="#{aluno}"/>
+				</p:selectOneMenu>
+				<h:outputText value="Cursos: "/>
+				<p:selectCheckboxMenu label="Cursos" value="#{matriculaBean.parametros.cursos}" 
+					converter="matriculaConverter" style="width:250px;" panelStyle="width:350px;"
+					filter="true" filterMatchMode="contains">
+					<f:selectItems value="#{matriculaBean.cursos}" var="curso" 
+						itemLabel="#{curso.nome}"/>					
+				</p:selectCheckboxMenu>
+				<h:outputText value="Data: "/>
+				<h:panelGroup>
+					<h:outputText value="De "/>
+					<p:calendar value="#{matriculaBean.parametros.dataInicial}" size="10"/>
+					<h:outputText value="até "/>
+					<p:calendar value="#{matriculaBean.parametros.dataFinal}" size="10"/>
+				</h:panelGroup>
+			</p:panelGrid>
+			<br/>
+			<p:commandButton value="Pesquisar" icon="fa fa-search" action="matriculaBean.pesquisar"
+				update="@form"/>
+			
 			<p:dataTable value="#{matriculaBean.matriculasVos}" var="matricula" style="margin-top:10px; width:60%"
 				emptyMessage="Nenhuma matrícula cadastrada">
-				<p:column headerText="Número" width="100">
+				<p:column headerText="Número" width="100" filterBy="#{matricula.numero}" filterMatchMode="contains">
 					<h:outputText value="#{matricula.numero}"/>
 				</p:column>
 				<p:column headerText="Aluno">
