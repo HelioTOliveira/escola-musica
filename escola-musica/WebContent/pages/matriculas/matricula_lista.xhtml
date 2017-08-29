@@ -23,7 +23,7 @@
 				</p:selectOneMenu>
 				<h:outputText value="Cursos: "/>
 				<p:selectCheckboxMenu label="Cursos" value="#{matriculaBean.parametros.cursos}" 
-					converter="matriculaConverter" style="width:250px;" panelStyle="width:350px;"
+					converter="cursoConverter" style="width:250px;" panelStyle="width:350px;"
 					filter="true" filterMatchMode="contains">
 					<f:selectItems value="#{matriculaBean.cursos}" var="curso" 
 						itemLabel="#{curso.nome}"/>					
@@ -31,9 +31,11 @@
 				<h:outputText value="Data: "/>
 				<h:panelGroup>
 					<h:outputText value="De "/>
-					<p:calendar value="#{matriculaBean.parametros.dataInicial}" size="10"/>
+					<p:calendar value="#{matriculaBean.parametros.dataInicial}" size="10"
+						mask="99/99/9999" pattern="dd/MM/yyyy"/>
 					<h:outputText value="até "/>
-					<p:calendar value="#{matriculaBean.parametros.dataFinal}" size="10"/>
+					<p:calendar value="#{matriculaBean.parametros.dataFinal}" size="10"
+						mask="99/99/9999" pattern="dd/MM/yyyy"/>
 				</h:panelGroup>
 			</p:panelGrid>
 			<br/>

@@ -1,5 +1,6 @@
 package escola.musica.servico.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,11 +14,14 @@ import escola.musica.modelo.Aluno;
 import escola.musica.modelo.Matricula;
 import escola.musica.modelo.MatriculaVO;
 import escola.musica.modelo.ParametrosBuscaMatriculas;
+import escola.musica.util.DataUtils;
 
 @Service(value = "MatriculaServico")
 @Transactional
 public class MatriculaServicoImpl implements escola.musica.servico.MatriculaServico {
 
+	private static final String FORMATO_BANCO_MYSQL = "yyyy-MM-dd";
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
@@ -54,6 +58,7 @@ public class MatriculaServicoImpl implements escola.musica.servico.MatriculaServ
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<MatriculaVO> pesquisar(ParametrosBuscaMatriculas parametros) {
 		StringBuilder builder = new StringBuilder("select new escola.musica.modelo.MatriculaVO("
@@ -63,10 +68,28 @@ public class MatriculaServicoImpl implements escola.musica.servico.MatriculaServ
 			builder.append(" and m.aluno = :aluno");
 		}
 		
+		if(parametros.getCursos() != null && !parametros.getCursos().isEmpty()){
+			builder.append(" and m.curso in (:cursos)");
+		}
+		
+		if(parametros.getDataInicial() != null){
+			builder.append(" and m.dataMatricula >= '" +  DataUtils.obterDataFormatoBanco
+					(parametros.getDataInicial(), FORMATO_BANCO_MYSQL) +"'");
+		}
+		
+		if(parametros.getDataFinal() != null){
+			builder.append(" and m.dataMatricula <= '" + DataUtils.obterDataFormatoBanco
+					(parametros.getDataFinal(), FORMATO_BANCO_MYSQL) +"'");
+		}
+		
 		Query query = entityManager.createQuery(builder.toString());
 		
 		if(parametros.getAluno() != null){
 			query.setParameter("aluno", parametros.getAluno());
+		}		
+		
+		if(parametros.getCursos() != null && !parametros.getCursos().isEmpty()){
+			query.setParameter("cursos", parametros.getCursos());
 		}
 		
 		return query.getResultList();
