@@ -18,6 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+
 @Entity
 public class Turma implements Serializable {
 
@@ -86,6 +88,7 @@ public class Turma implements Serializable {
 	}
 
 	@ManyToMany(fetch = FetchType.EAGER)
+	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	@JoinTable(name = "turma_matricula",
 			joinColumns = {@JoinColumn(name = "id_turma")},
 			inverseJoinColumns = {@JoinColumn(name = "id_matricula")})
@@ -98,6 +101,7 @@ public class Turma implements Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	@JoinColumn(name = "id_turma")
 	public List<Horario> getHorarios() {
 		return horarios;

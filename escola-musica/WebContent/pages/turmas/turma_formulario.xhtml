@@ -76,8 +76,8 @@
 					label="Selecione o Horário"/>
 				</p:column>
 				<p:column style="width:10%">				
-					<p:commandButton icon="excluir-icon" update="@form" oncomplete="PF('confirmarExclusaoHorarioDialog').show()"
-						action="#{turmabean.prepararRemocaoHorario(indice)}"/>
+					<p:commandButton icon="excluir-icon" update="@form" oncomplete="PF('confirmaExclusaoHorarioDialog').show()"
+						action="#{turmaBean.prepararRemocaoHorario(indice)}"/>
 				</p:column>				
 		    </p:dataTable>	
 		<ui:remove>
@@ -140,7 +140,7 @@
 	
 	<p:confirmDialog message="Deseja realmente excluir este horário?" header="Exclusão de Horário"
 		widgetVar="confirmaExclusaoHorarioDialog">
-		<p:commandButton value="Sim" action="turmaBean.removerHorario}" update="@form"
+		<p:commandButton value="Sim" action="#{turmaBean.removerHorario}" update="@form"
 			oncomplete="PF('confirmaExclusaoHorarioDialog').hide()"/>
 			<p:commandButton value="Não" update="@form"	oncomplete="PF('confirmaExclusaoHorarioDialog').hide()"/>			
 	</p:confirmDialog>
