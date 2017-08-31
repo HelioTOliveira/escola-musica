@@ -8,6 +8,16 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<p:panel header="Lista de Avaliações" rendered="#{avaliacaoBean.avaliacao == null}">
-		
+		<p:dataTable value="#{avaliacaoBean.avaliacoes}" var="avaliacao">
+			<p:column headerText="Aluno">
+				<h:outputText value="#{avaliacao.matricula.aluno.nome}"/>
+			</p:column>
+			<p:column headerText="Bimestre/Ano">
+				<h:outputText value="#{avaliacao.bimestre.label} / #{avaliacao.ano}"/>
+			</p:column>
+			<p:column headerText="Nota">
+				<h:outputText value="#{avaliacao.nota}"/>
+			</p:column>
+		</p:dataTable>
 	</p:panel>
 </html>

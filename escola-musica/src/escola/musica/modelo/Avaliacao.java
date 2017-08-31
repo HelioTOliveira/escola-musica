@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -18,9 +20,14 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = Avaliacao.LISTAR_TODOS, query = Avaliacao.LISTAR_TODOS)
+})
 public class Avaliacao implements Serializable {
 
 	private static final long serialVersionUID = 8474601867304012957L;
+
+	public static final String LISTAR_TODOS = "from Avaliacao";
 
 	private Integer id;
 	private Matricula matricula;

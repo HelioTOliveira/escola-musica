@@ -8,7 +8,14 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<p:panel header="Cadastro de Avaliações" rendered="#{avaliacaoBean.avaliacao != null}">
-		
+		<p:panelGrid columns="2">
+			<h:outputText value="Matrícula: "/>
+			<p:selectOneMenu value="#{avaliacaoBean.avaliacao.matricula}" converter="matriculaConverter">
+				<f:selectItem itemLabel="::Selecione::" itemValue="#{null}"/>
+				<f:selectItems value="#{avaliacaoBean.matriculas}" var="matricula" itemLabel="#{matricula.aluno.nome}
+					 - #{matricula.curso.nome}" itemValue="matricula"/>				
+			</p:selectOneMenu>
+		</p:panelGrid>
 		
 	</p:panel>
 </html>
