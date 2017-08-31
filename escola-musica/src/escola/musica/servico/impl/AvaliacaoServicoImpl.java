@@ -24,5 +24,11 @@ public class AvaliacaoServicoImpl implements AvaliacaoServico{
 		return entityManager.createNamedQuery(Avaliacao.LISTAR_TODOS, Avaliacao.class).getResultList();
 	}
 
+	@Override
+	public void salvar(Avaliacao avaliacao) {
+		entityManager.merge(avaliacao);
+		
+	}
+
 	
 }

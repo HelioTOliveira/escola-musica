@@ -8,4 +8,6 @@ public interface AvaliacaoServico {
 
 	public List<Avaliacao> listarTodos();
 
+	public void salvar(Avaliacao avaliacao);
+
 }

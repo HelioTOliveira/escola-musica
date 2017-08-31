@@ -60,7 +60,7 @@
 	
 	<url-mapping id="avaliacoes">
 		<pattern value="/avaliacao/manutencao/" />
-		<view-id value="/pages/avaliacoes/avalicao_wrapper.jsf" />
+		<view-id value="/pages/avaliacoes/avaliacao_wrapper.jsf" />
 		<action onPostback="false">#{avaliacaoBean.iniciarBean}</action>
 	</url-mapping>
 

@@ -2,6 +2,7 @@ package escola.musica.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import escola.musica.modelo.Avaliacao;
+import escola.musica.modelo.Bimestre;
 import escola.musica.modelo.Matricula;
 import escola.musica.servico.AvaliacaoServico;
 import escola.musica.servico.MatriculaServico;
+import escola.musica.util.Mensagem;
 
 @Controller("avaliacaoBean")
 @Scope("view")
@@ -29,10 +32,33 @@ public class AvaliacaoBean implements Serializable {
 	private MatriculaServico matriculaServico;
 
 	public void iniciarBean() {
-		avaliacoes = avaliacaoServico.listarTodos();
+		listarAvaliacoes();
 		matriculas = matriculaServico.listarTodasAtivas();
 	}
 
+	private void listarAvaliacoes() {
+		avaliacoes = avaliacaoServico.listarTodos();
+	}
+	
+	public void cancelar(){
+		avaliacao = null;
+	}
+	
+	public void salvar(){
+		avaliacaoServico.salvar(avaliacao);
+		Mensagem.mensagemInformacao("Avaliação cadastrada com sucesso");
+		listarAvaliacoes();	
+		avaliacao = null;
+	}
+	
+	public void novaAvaliacao(){
+		avaliacao = new Avaliacao();
+	}
+
+	public List<Bimestre> getBimestres(){
+		return Arrays.asList(Bimestre.values());
+	}
+	
 	public Avaliacao getAvaliacao() {
 		return avaliacao;
 	}

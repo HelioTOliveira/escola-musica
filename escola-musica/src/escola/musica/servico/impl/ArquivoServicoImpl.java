@@ -24,8 +24,8 @@ public class ArquivoServicoImpl implements ArquivoServico{
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	@Autowired
-	@Qualifier("filesDir")
+//	@Autowired
+//	@Qualifier("filesDir")
 	private String folderPath;
 	
 	@Override
