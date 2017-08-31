@@ -65,9 +65,9 @@ public class ArquivoServicoImpl implements ArquivoServico{
 	
 	@Override
 	public File obterArquivo(String nomeArquivo, String nomeDiretorio) {
-		//folderPath = System.getProperty("user.home");
-		//File diretorioRaiz = new File(folderPath + "/" + "escola_musica");
-		File diretorioRaiz = new File(folderPath);
+		folderPath = System.getProperty("user.home");
+		File diretorioRaiz = new File(folderPath + "/" + "escola_musica");
+		//File diretorioRaiz = new File(folderPath);
 		File diretorio = new File(diretorioRaiz, nomeDiretorio);
 		if (!diretorio.exists()) {
 			diretorio.mkdirs();

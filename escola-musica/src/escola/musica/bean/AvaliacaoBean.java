@@ -63,6 +63,10 @@ public class AvaliacaoBean implements Serializable {
 		arquivoSelecionado = arquivo.getNome();
 	}
 
+	public void editar(Avaliacao avaliacao){
+		this.avaliacao = avaliacao;
+	}
+	
 	public void novaAvaliacao() {
 		avaliacao = new Avaliacao();
 	}
