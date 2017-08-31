@@ -1,5 +1,6 @@
 package escola.musica.servico.impl;
 
+import java.io.File;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -44,5 +45,9 @@ public class AvaliacaoServicoImpl implements AvaliacaoServico{
 		return "avaliacoes/"+ avaliacao.getAno() +"/"+ avaliacao.getBimestre().getLabel();
 	}
 
-	
+	@Override
+	public File obterArquivoAvaliacao(Avaliacao avaliacao){
+		return arquivoServico.obterArquivo(avaliacao.getArquivo().getNome(),
+				avaliacao.getArquivo().getCaminho());
+	}
 }

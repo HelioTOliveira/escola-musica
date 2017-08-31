@@ -1,11 +1,17 @@
 package escola.musica.bean;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.activation.MimetypesFileTypeMap;
+
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -62,7 +68,17 @@ public class AvaliacaoBean implements Serializable {
 		avaliacao.setArquivo(arquivo);
 		arquivoSelecionado = arquivo.getNome();
 	}
-
+	
+	public StreamedContent baixarArquivo(Avaliacao avaliacao) throws FileNotFoundException{
+		FileInputStream stream = 
+				new FileInputStream(avaliacaoServico.obterArquivoAvaliacao(avaliacao));
+		
+		String tipoDoArquivo = new MimetypesFileTypeMap().
+				getContentType(avaliacao.getArquivo().getNome());
+				
+		return new DefaultStreamedContent(stream, tipoDoArquivo, avaliacao.getArquivo().getNome());
+	}
+	
 	public void editar(Avaliacao avaliacao){
 		this.avaliacao = avaliacao;
 	}
