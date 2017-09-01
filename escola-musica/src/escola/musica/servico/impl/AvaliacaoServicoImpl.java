@@ -14,6 +14,7 @@ import escola.musica.modelo.Arquivo;
 import escola.musica.modelo.Avaliacao;
 import escola.musica.servico.ArquivoServico;
 import escola.musica.servico.AvaliacaoServico;
+import escola.musica.servico.EnvioEmailServico;
 
 @Transactional
 @Service("avaliacaoServico")
@@ -24,6 +25,8 @@ public class AvaliacaoServicoImpl implements AvaliacaoServico{
 	
 	@Autowired
 	private ArquivoServico arquivoServico;
+	@Autowired
+	private EnvioEmailServico envioEmailServico;
 	
 	@Override
 	public List<Avaliacao> listarTodos() {
@@ -38,6 +41,7 @@ public class AvaliacaoServicoImpl implements AvaliacaoServico{
 		avaliacao.setArquivo(arquivoSalvo);
 		entityManager.merge(avaliacao);
 		
+		envioEmailServico.enviarEmailCorrecaoAvaliacao(avaliacao);
 	}
 
 	private String criarDiretorioArquivo(Avaliacao avaliacao) {
