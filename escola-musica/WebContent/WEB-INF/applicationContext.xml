@@ -41,9 +41,9 @@
 	<!-- Quem e o banco de dados que vai ser acessado -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/escola_musica_turma2" />
-		<property name="username" value="root" />
-		<property name="password" value="root1234" />
+		<property name="url" value="${urlConexaoBanco}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
 	</bean>
 	
 	<!-- Parte de transão para o codigo ele faz o roback e commit -->
@@ -104,6 +104,17 @@
 	            </entry>
 	        </map>
 	    </property>
+	</bean>
+	
+	<!-- Para ler o arquivo  config.properties e substituir as variavel pelo valor que esta no arquivo-->
+	<bean id="dataSourcePropertiesPlaceHolder"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true"/>
+		<property name="location" value="file:${user.home}/#{servletContext.contextPath}/config.properties"/>
+	</bean>
+	
+	<bean id="filesDir" class="java.lang.String">
+		<constructor-arg value="${user.home}/#{servletContext.contextPath}/files"/>
 	</bean>
 	
 	<!--  Seguração utilizando spring security -->
