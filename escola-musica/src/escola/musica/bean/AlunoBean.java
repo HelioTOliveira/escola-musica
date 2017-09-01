@@ -57,7 +57,7 @@ public class AlunoBean implements Serializable {
 	public void salvar(){
 		Aluno alunoExistente = alunoServico.obterPorEmail(aluno.getEmail());
 		
-		if(alunoExistente != null){
+		if(alunoExistente != null && aluno.getId() != alunoExistente.getId()){
 			Mensagem.mensagemErro("Já existe um aluno com este email");
 			return;
 		}

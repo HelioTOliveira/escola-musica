@@ -31,4 +31,17 @@ public class AlunoServicoImpl implements AlunoServico{
 		return entityManager.createQuery("from Aluno").getResultList();
 	}
 
+	@Override
+	public Aluno obterPorEmail(String email) {
+		
+		List<Aluno> alunos = entityManager.createNamedQuery(Aluno.OBETER_POR_EMAIL, Aluno.class).setParameter("email",
+				email).getResultList();
+		
+		if(!alunos.isEmpty()){
+			return alunos.get(0);
+		}else{
+			return null;
+		}
+	}
+
 }
