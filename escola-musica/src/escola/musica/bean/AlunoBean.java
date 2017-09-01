@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.sun.corba.se.pept.protocol.MessageMediator;
+
 import escola.musica.dao.GenericDAO;
 import escola.musica.modelo.Aluno;
 import escola.musica.modelo.Cidade;
@@ -53,6 +55,12 @@ public class AlunoBean implements Serializable {
 	}
 	
 	public void salvar(){
+		Aluno alunoExistente = alunoServico.obterPorEmail(aluno.getEmail());
+		
+		if(alunoExistente != null){
+			Mensagem.mensagemErro("Já existe um aluno com este email");
+			return;
+		}
 		
 		alunoServico.salvar(aluno);
 		
