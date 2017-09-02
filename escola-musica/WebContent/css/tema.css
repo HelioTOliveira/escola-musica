@@ -5,7 +5,21 @@
 .excluir-icon{background: url("icons/excluir.png") !important;}
 .cursos-icon{background: url("icons/cursos.png") !important;}
 .cancelar-icon{background: url("icons/cancelar.png") !important;}
+
 .ui-growl{
 	top: 10%;
 	left: 40%;
+}
+
+.menu-template{
+ 
+	position: absolute;	
+	
+}
+
+.principal-template{
+ 
+	position: absolute;
+	margin-left: 190px;
+	
 }
